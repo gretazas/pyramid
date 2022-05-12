@@ -1,18 +1,20 @@
 import numpy as np
 
 #game_is_on = True
-letters_to_numbers = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5}
-row = int(input('Choose letter for your position move in a row: '))
+
+row = input('Choose letter for your position move in a row: ').upper()
 column = int(input('choose number for your position in a column: '))
+letters_to_numbers = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5}
+row = letters_to_numbers[row]
 
 score_board = {'you': ['|', 'score: 0', '|'],
                'bot': ['|', 'score: 0', '|']}
 
 board = np.array([['', 1, 2, 3, 4, 5, 6, 7, 8, 9],
-                  ['A', '|', '|', '', '', 'o', '|', '|', '|', '|'],
-                  ['B', '|', '', '|', 'o', '', 'o', '|', '||', '|'],
-                  ['C', '|', '', 'o', '', 'o', '', 'o', '|||', '|'],
-                  ['D', '|', 'o', '', 'o', '', 'o', '', 'o', '|||'],
+                  ['A', '|', '', '', '', 'o', '', '', '', ''],
+                  ['B', '|', '', '', 'o', '', 'o', '', '', ''],
+                  ['C', '|', '', 'o', '', 'o', '', 'o', '', ''],
+                  ['D', '', 'o', '', 'o', '', 'o', '', 'o', ''],
                   ['E', 'o', '', 'o', '', 'o', '', 'o', '', 'o'],
                   ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']])
 
