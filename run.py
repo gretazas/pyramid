@@ -9,30 +9,31 @@ board = np.array([['', 1, 2, 3, 4, 5, 6, 7, 8, 9],
                   ['B', '', '', '', 'o', '', 'o', '', '', ''],
                   ['C', '', '', 'o', '', 'o', '', 'o', '', ''],
                   ['D', '', 'o', '', 'o', '', 'o', '', 'o', ''],
-                  ['E', 'o', '', 'o', '', 'o', '', 'o', '', 'o'],
-                  ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']])
+                  ['E', 'o', '', 'o', '', 'o', '', 'o', '', 'o']])
 
-#game_is_on = True
+GAME_IS_ON = True
 
-def print_game():
+print(board.diagonal())
+
+def init_game():
     """Print score board game init"""
 
-    YOU = score_board['you']
+    your_score = score_board['you']
     #global active_player
-    active_player = YOU
+    active_player = your_score
     print('Your score: ')
-    print(YOU)
-    BOT = score_board['bot']
+    print(your_score)
+    bot_score = score_board['bot']
     print('Bot\'s score: ')
-    print(BOT)
-    for i in range(7):
+    print(bot_score)
+    for i in range(6):
         print(board[i])
     position_inputs()
 
 def position_inputs():
     '''Initial game inputs to choose first move'''
 
-    while True:
+    while GAME_IS_ON:
         try:
             row_input = input('Choose letter for your position from A-E move in a row: ').upper()
             letters_to_numbers = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5}
@@ -45,7 +46,7 @@ def position_inputs():
             print('Not a required letter, please start again')
             position_inputs()
 
-    while True:
+    while GAME_IS_ON:
         try:
             column_input = int(input('Choose number for your position from 1-9 in a column: '))
             break
@@ -58,7 +59,13 @@ def position_inputs():
 def position_is_valid(row, column):
     """Valid posiotion choises"""
 
-    if board[row][column] == '@':
+    if row not in range(1, 6):
+        print('Not a required letter, please start again')
+        position_inputs()
+    elif column not in range(1, 10):
+        print('Not a required number, please try again')
+        position_inputs()
+    elif board[row][column] == '@':
         print('Already chosen, please try again.')
         position_inputs()
     elif board[row][column] == '':
@@ -66,7 +73,50 @@ def position_is_valid(row, column):
         position_inputs()
     else:
         board[row][column] = '@'
-        for i in range(7): print(board[i])
-        position_inputs()
+        for i in range(6):
+            print(board[i])
+        check_for_lines()#was before position_inputs()
 
-print_game()
+def check_for_lines():
+    '''Check if got lines for score'''
+
+    all_rows = board[1:6, :]
+    for row in all_rows:
+        if 'o' not in row:
+            score = np.count_nonzero(row)
+            score -= 1 #it would not include letter at index 0
+            print(score)
+            print(row)
+
+    for column in board.T:
+        if 'o' not in column:
+            # if column != board[:, 0:1]:
+            #     print('here for all columns')
+            print(column)
+            
+            score = np.count_nonzero(column)
+            score -= 1 #it would not include number at index 0
+            print(score)
+    position_inputs()
+    
+    # all_diagonals = {'diagonal_line_1' : [[board[1][5]], [board[2][4]], [board[3][3]], [board[4][2]], [board[5][1]]]}
+    #                 # 'diagonal_line_2' :
+    #                 # 'diagonal_line_3' :
+    #                 # 'diagonal_line_4' :
+    #                 # 'diagonal_line_5' :
+    #                 # 'diagonal_line_6' :
+    #                 # 'diagonal_line_7' :
+    #                 # 'diagonal_line_8' :
+
+    # lines_score = diagonal_lines.diagonal_line_1[0] = 5
+    # diagonal_lines.diagonal_line_1[1] = 4,
+    # diagonal_lines.diagonal_line_1[2] = 3,
+    # diagonal_lines.diagonal_line_1[3] = 2,
+    # diagonal_lines.diagonal_line_1[4] = 5,
+    # diagonal_lines.diagonal_line_1[5] = 4,
+    # diagonal_lines.diagonal_line_1[6] = 3,
+    # diagonal_lines.diagonal_line_1[7] = 2
+
+    #check_score(row, all_rows)
+
+init_game()
