@@ -9,7 +9,8 @@ board = np.array([['o', 1, 2, 3, 4, 5, 6, 7, 8, 9, '.', '.', '.'],
                   ['B', '', '', '', 'o', '', 'o', '', '', '', '', '', ''],
                   ['C', '', '', 'o', '', 'o', '', 'o', '', '', '', '', ''],
                   ['D', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '', ''],
-                  ['E', 'o', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '']])
+                  ['E', 'o', '', 'o', '', 'o', '', 'o', '', 'o', '', '', ''], 
+                  ['','','','','','','','','','','','','']])
 
 GAME_IS_ON = True
 
@@ -76,43 +77,53 @@ def position_is_valid(row, column):
         check_for_lines()#was before position_inputs()
 
 def check_for_lines():
-    '''Check if got lines for score'''
+    '''Check if got lines for score and count it'''
 
-    score = score_board['your_score']
-    print(score)
-    all_rows = board[1:6, :]
-    for row in all_rows:
-        if 'o' not in row:
-            score += np.count_nonzero(row)
-            score -= 1 #it would not include letter at index 0
-            print('row', score)
-            break
-            # print(row)
+    # all_rows = board[1:6, :]
+    # for one_row in all_rows:
+    #     if 'o' not in one_row:
+    #         score_board['your_score'] += np.count_nonzero(one_row)
+    #         score_board['your_score'] -= 1 #it would not include letter at index 0
+    #         # np.char.replace (one_row,  '@', '*')
+    #         one_row[12] = 'o'
+    #         print('row score:', score_board['your_score'])
+    #         position_inputs()
+    #         break
+    
 
-    for column in board.T:
-        if 'o' not in column:
-            score += np.count_nonzero(column)
-            score -= 1 #it would not include number at index 0
-            print('column', score)
-            break
-            # print(column)
-
+    #                                         # all_columns = board[1:6, 1:10]
+    #                                         # for column in all_columns:
+    # for one_column in board.T:
+    #     if 'o' not in one_column:
+    #         score_board['your_score'] += np.count_nonzero(one_column)
+    #         score_board['your_score'] -= 1 #it would not include number at index 0
+    #         # replace_for_column = np.char.replace (column,  '@', '*')
+    #         # print(replace_for_column)
+    #         one_column[len(one_column)-1] = 'o'
+    #         print(one_column)
+    #         print('column score:', score_board['your_score'])
+    #         position_inputs()
+    #         break
+    # position_inputs()
 
     all_diagonals = [board.diagonal(-2),
                     board.diagonal(),
                     board.diagonal(2),
                     board.diagonal(4),
-                    np.flipud(board).diagonal(1),
-                    np.flipud(board).diagonal(3),
-                    np.flipud(board).diagonal(5),
-                    np.flipud(board).diagonal(7)]# -1
+                    np.flipud(board).diagonal(0),
+                    np.flipud(board).diagonal(2),
+                    np.flipud(board).diagonal(4),
+                    np.flipud(board).diagonal(6)]# -1
 
     for diagonal in all_diagonals:
         if 'o' not in diagonal:
-            score += np.count_nonzero(diagonal)
-            score -= 1 #it would not include number at index 0
-            print('diagonal', score)
-
+            score_board['your_score'] += np.count_nonzero(diagonal)
+            score_board['your_score'] -= 1 #it would not include number at index 0
+            # replace_for_column = np.char.replace (diagonal,  '@', '*')
+            # print(replace_for_column)
+            print('diagonal score:', score_board['your_score'])
+            break
+    # print('Total score:', score_board['your_score'])
     position_inputs()
 
 init_game()
