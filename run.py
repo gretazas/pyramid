@@ -4,19 +4,19 @@ import numpy as np
 score_board = {'your_score': 0,
                'bots_score': 0}
 
-board = np.array([['','','','','','','','','','','','','','','',''],
-                  ['o','','','', 1, 2, 3, 4, 5, 6, 7, 8, 9, '.', '.', '.'],
-                  ['','','','A', '', '', '', '', 'o', '', '', '', '', '', '', ''],
-                  ['','','','B', '', '', '', 'o', '', 'o', '', '', '', '', '', ''],
-                  ['','','','C', '', '', 'o', '', 'o', '', 'o', '', '', '', '', ''],
-                  ['','','','D', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '', ''],
-                  ['','','','E', 'o', '', 'o', '', 'o', '', 'o', '', 'o', '', '', ''],
-                  ['','','','','','','','','','','','','','','','']])
+board = np.array([['','','','','','','','','','','','','','','','',''],
+                  ['o','','','', 1, 2, 3, 4, 5, 6, 7, 8, 9, '.', '.', '.','.'],
+                  ['','','','A', '', '', '', '', 'o', '', '', '', '', '', '', '',''],
+                  ['','','','B', '', '', '', 'o', '', 'o', '', '', '', '', '', '',''],
+                  ['','','','C', '', '', 'o', '', 'o', '', 'o', '', '', '', '', '',''],
+                  ['','','','D', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '', '',''],
+                  ['','','','E', 'o', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '',''],
+                  ['','','','','','','','','','','','','','','','','']])
 
 GAME_IS_ON = True
 
 def init_game():
-    """Print score board game init"""
+    """Print score board game initialization"""
 
     your_total_score = score_board['your_score']
     # global active_player
@@ -26,8 +26,7 @@ def init_game():
     bot_total_score = score_board['bots_score']
     print('Bot\'s score: ')
     print(bot_total_score)
-    for i in range(0, 8):
-        print(board[i])
+    print(board[1:7,3:13])
     position_inputs()
 
 def position_inputs():
@@ -74,8 +73,14 @@ def position_is_valid(row, column):
         position_inputs()
     else:
         board[row][column] = '@'
-        for i in range(0, 8):
-            print(board[i])
+        if 'o' in board[1:7,3:13]:
+            for i in range(0, 8):
+                print(board[i])
+        else:
+            for i in range(0, 8):
+                print(board[i])
+            decide_winner()
+
         check_for_lines()#was before position_inputs()
 
 def check_for_lines():
@@ -124,17 +129,28 @@ def check_for_lines():
         board[0][6] = 'o'
     if 'o' not in np.flipud(board).diagonal(3):
         score_board['your_score'] += 5
-        board[0][9] = 'o'
+        board[0][10] = 'o'
     if 'o' not in np.flipud(board).diagonal(5):
         score_board['your_score'] += 4
-        board[0][11] = 'o'
+        board[0][12] = 'o'
     if 'o' not in np.flipud(board).diagonal(7):
         score_board['your_score'] += 3
-        board[0][13] = 'o'
+        board[0][14] = 'o'
     if 'o' not in np.flipud(board).diagonal(9):
         score_board['your_score'] += 2
-        board[0][15] = 'o'
-    
+        board[0][16] = 'o'
+
     print('Your score:', score_board['your_score'])
     position_inputs()
+    
+def decide_winner():
+    '''Decide who won'''
+    if score_board['your_score'] > score_board['bots_score']:
+        print('Congradulations! You are the winner!')
+    elif score_board['your_score'] < score_board['bots_score']:
+        print('You lost! Sorry.')
+    else:
+        print('It\'s a draw.')
+
+
 init_game()
