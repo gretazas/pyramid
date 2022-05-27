@@ -76,73 +76,95 @@ def position_is_valid(row, column):
         if 'o' in board[1:7,3:13]:
             for i in range(0, 8):
                 print(board[i])
+            print('Your score:', score_board['your_score'])
         else:
             for i in range(0, 8):
                 print(board[i])
+            print('Your score:', score_board['your_score'])
             decide_winner()
 
         check_for_lines()#was before position_inputs()
 
 def check_for_lines():
     '''Check if got lines for score and count it'''
-
-    # all_rows = board[1:6, :]
-    # for one_row in all_rows:
-    #     if 'o' not in one_row:
-    #         score_board['your_score'] += np.count_nonzero(one_row)
-    #         score_board['your_score'] -= 1 #it would not include letter at index 0
-    #         # np.char.replace (one_row,  '@', '*')
-    #         one_row[12] = 'o'
-    #         print('row score:', score_board['your_score'])
-    #         position_inputs()
-    #         break
+    hit_row = None
+    hit_column = None
+    hit_diagonal = None
+    all_rows = board[1:6, :]
+    for one_row in all_rows:
+        if 'o' not in one_row:
+            hit_row = True
+            score_board['your_score'] += np.count_nonzero(one_row)
+            score_board['your_score'] -= 1 #it would not include letter at index 0
+            # np.char.replace (one_row,  '@', '*')
+            one_row[12] = 'o'
+            print('row score:', score_board['your_score'])
+            position_inputs()
+            break
 
     #                                         # all_columns = board[1:6, 1:10]
     #                                         # for column in all_columns:
-    # for one_column in board.T:
-    #     if 'o' not in one_column:
-    #         score_board['your_score'] += np.count_nonzero(one_column)
-    #         score_board['your_score'] -= 1 #it would not include number at index 0
-    #         # replace_for_column = np.char.replace (column,  '@', '*')
-    #         # print(replace_for_column)
-    #         one_column[len(one_column)-1] = 'o'
-    #         print(one_column)
-    #         print('column score:', score_board['your_score'])
-    #         position_inputs()
-    #         break
-    # position_inputs()
+    for one_column in board.T:
+        if 'o' not in one_column:
+            hit_column = True
+            score_board['your_score'] += np.count_nonzero(one_column)
+            score_board['your_score'] -= 1 #it would not include number at index 0
+            # replace_for_column = np.char.replace (column,  '@', '*')
+            # print(replace_for_column)
+            one_column[len(one_column)-1] = 'o'
+            print(one_column)
+            print('column score:', score_board['your_score'])
+            position_inputs()
+            break
 
     if 'o' not in board.diagonal():
+        hit_diagonal = True
         score_board['your_score'] += 2
         board[0][0] = 'o'
         # replace_for_column = np.char.replace (diagonal,  '@', '*')
         # print(replace_for_column)
         # print('Total score:', score_board['your_score'])
     if 'o' not in board.diagonal(2):
+        hit_diagonal = True
         score_board['your_score'] += 3
         board[0][2] = 'o'
     if 'o' not in board.diagonal(4):
+        hit_diagonal = True
         score_board['your_score'] += 4
         board[0][4] = 'o'
     if 'o' not in board.diagonal(6):
+        hit_diagonal = True
         score_board['your_score'] += 5
         board[0][6] = 'o'
     if 'o' not in np.flipud(board).diagonal(3):
+        hit_diagonal = True
         score_board['your_score'] += 5
         board[0][10] = 'o'
     if 'o' not in np.flipud(board).diagonal(5):
+        hit_diagonal = True
         score_board['your_score'] += 4
         board[0][12] = 'o'
     if 'o' not in np.flipud(board).diagonal(7):
+        hit_diagonal = True
         score_board['your_score'] += 3
         board[0][14] = 'o'
     if 'o' not in np.flipud(board).diagonal(9):
+        hit_diagonal = True
         score_board['your_score'] += 2
         board[0][16] = 'o'
-
-    print('Your score:', score_board['your_score'])
+    check_if_two_together(hit_row, hit_column, hit_diagonal)
     position_inputs()
-    
+
+def check_if_two_together(in_row, in_column, in_diagonal):
+    '''If got two lines at once'''
+
+    if in_row and in_column:
+        print('hit hit_row and hit_column')
+    if in_column and in_diagonal:
+        print('hit hit_column and hit_diagonal')
+    if in_row and in_diagonal:
+        print('hit ')
+
 def decide_winner():
     '''Decide who won'''
     if score_board['your_score'] > score_board['bots_score']:
