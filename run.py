@@ -90,6 +90,7 @@ def position_is_valid(row, column):
         check_for_lines()#was before position_inputs()
 
 def while_rows():
+    '''Get eatch row and get score for it'''
     all_rows = board[1:6, :]
     for one_row in all_rows:
         while 'o' not in one_row:
@@ -103,6 +104,7 @@ def while_rows():
                                         # all_columns = board[1:6, 1:10]
                                         # for column in all_columns
 def while_columns():
+    '''Get eatch column and get score for it'''
     for one_column in board.T:
         while 'o' not in one_column:
             score_board['your_score'] += np.count_nonzero(one_column)
@@ -114,48 +116,42 @@ def while_columns():
             print('column score:', score_board['your_score'])
             break
 
-    # if 'o' not in board.diagonal():
-    #     hit_diagonal = True
-    #     score_board['your_score'] += 2
-    #     board[0][0] = 'o'
-    #     # replace_for_column = np.char.replace (diagonal,  '@', '*')
-    #     # print(replace_for_column)
-    #     # print('Total score:', score_board['your_score'])
-    # if 'o' not in board.diagonal(2):
-    #     hit_diagonal = True
-    #     score_board['your_score'] += 3
-    #     board[0][2] = 'o'
-    # if 'o' not in board.diagonal(4):
-    #     hit_diagonal = True
-    #     score_board['your_score'] += 4
-    #     board[0][4] = 'o'
-    # if 'o' not in board.diagonal(6):
-    #     hit_diagonal = True
-    #     score_board['your_score'] += 5
-    #     board[0][6] = 'o'
-    # if 'o' not in np.flipud(board).diagonal(3):
-    #     hit_diagonal = True
-    #     score_board['your_score'] += 5
-    #     board[0][10] = 'o'
-    # if 'o' not in np.flipud(board).diagonal(5):
-    #     hit_diagonal = True
-    #     score_board['your_score'] += 4
-    #     board[0][12] = 'o'
-    # if 'o' not in np.flipud(board).diagonal(7):
-    #     hit_diagonal = True
-    #     score_board['your_score'] += 3
-    #     board[0][14] = 'o'
-    # if 'o' not in np.flipud(board).diagonal(9):
-    #     hit_diagonal = True
-    #     score_board['your_score'] += 2
-    #     board[0][16] = 'o'
-    # check_if_two_together(hit_row, hit_column, hit_diagonal)
+def while_diagonals():
+    while 'o' not in board.diagonal():
+        score_board['your_score'] += 2
+        board[0][0] = 'o'
+        # replace_for_column = np.char.replace (diagonal,  '@', '*')
+        # print(replace_for_column)
+        # print('Total score:', score_board['your_score'])
+    while 'o' not in board.diagonal(2):
+        score_board['your_score'] += 3
+        board[0][2] = 'o'
+    while 'o' not in board.diagonal(4):
+        score_board['your_score'] += 4
+        board[0][4] = 'o'
+    while 'o' not in board.diagonal(6):
+        score_board['your_score'] += 5
+        board[0][6] = 'o'
+    while 'o' not in np.flipud(board).diagonal(3):
+        score_board['your_score'] += 5
+        board[0][10] = 'o'
+    while 'o' not in np.flipud(board).diagonal(5):
+        score_board['your_score'] += 4
+        board[0][12] = 'o'
+    while 'o' not in np.flipud(board).diagonal(7):
+        score_board['your_score'] += 3
+        board[0][14] = 'o'
+    while 'o' not in np.flipud(board).diagonal(9):
+        score_board['your_score'] += 2
+        board[0][16] = 'o'
 
 def check_for_lines():
-    '''Check if got lines for score and count it'''
-    statement_for_rows = threading.Thread(target= while_rows)
+    '''Get functions to work at the same time'''
+    statement_for_rows = threading.Thread(target = while_rows)
     statement_for_columns = threading.Thread(target = while_columns)
+    statement_for_diagonals = threading.Thread(target = while_diagonals)
     position_inputs_again = threading.Thread(target = position_inputs)
+    statement_for_diagonals.start()
     statement_for_rows.start()
     statement_for_columns.start()
     position_inputs_again.start()
