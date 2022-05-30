@@ -1,6 +1,10 @@
 '''Numpy will help me to navigate through the rows and columns'''
 import numpy as np
 
+'''Time will help me to run a few sunctions at a time'''
+import time
+import threading
+
 score_board = {'your_score': 0,
                'bots_score': 0}
 
@@ -11,7 +15,7 @@ board = np.array([['','','','','','','','','','','','','','','','',''],
                   ['','','','C', '', '', 'o', '', 'o', '', 'o', '', '', '', '', '',''],
                   ['','','','D', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '', '',''],
                   ['','','','E', 'o', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '',''],
-                  ['','','','','','','','','','','','','','','','','']])
+                  ['','o','o','o','','','','','','','','','','o','o','o','o']])
 
 GAME_IS_ON = True
 
@@ -85,28 +89,22 @@ def position_is_valid(row, column):
 
         check_for_lines()#was before position_inputs()
 
-def check_for_lines():
-    '''Check if got lines for score and count it'''
-    hit_row = None
-    hit_column = None
-    hit_diagonal = None
+def while_rows():
     all_rows = board[1:6, :]
     for one_row in all_rows:
-        if 'o' not in one_row:
-            hit_row = True
+        while 'o' not in one_row:
             score_board['your_score'] += np.count_nonzero(one_row)
             score_board['your_score'] -= 1 #it would not include letter at index 0
             # np.char.replace (one_row,  '@', '*')
             one_row[12] = 'o'
             print('row score:', score_board['your_score'])
-            position_inputs()
             break
 
-    #                                         # all_columns = board[1:6, 1:10]
-    #                                         # for column in all_columns:
+                                        # all_columns = board[1:6, 1:10]
+                                        # for column in all_columns
+def while_columns():
     for one_column in board.T:
-        if 'o' not in one_column:
-            hit_column = True
+        while 'o' not in one_column:
             score_board['your_score'] += np.count_nonzero(one_column)
             score_board['your_score'] -= 1 #it would not include number at index 0
             # replace_for_column = np.char.replace (column,  '@', '*')
@@ -114,56 +112,54 @@ def check_for_lines():
             one_column[len(one_column)-1] = 'o'
             print(one_column)
             print('column score:', score_board['your_score'])
-            position_inputs()
             break
 
-    if 'o' not in board.diagonal():
-        hit_diagonal = True
-        score_board['your_score'] += 2
-        board[0][0] = 'o'
-        # replace_for_column = np.char.replace (diagonal,  '@', '*')
-        # print(replace_for_column)
-        # print('Total score:', score_board['your_score'])
-    if 'o' not in board.diagonal(2):
-        hit_diagonal = True
-        score_board['your_score'] += 3
-        board[0][2] = 'o'
-    if 'o' not in board.diagonal(4):
-        hit_diagonal = True
-        score_board['your_score'] += 4
-        board[0][4] = 'o'
-    if 'o' not in board.diagonal(6):
-        hit_diagonal = True
-        score_board['your_score'] += 5
-        board[0][6] = 'o'
-    if 'o' not in np.flipud(board).diagonal(3):
-        hit_diagonal = True
-        score_board['your_score'] += 5
-        board[0][10] = 'o'
-    if 'o' not in np.flipud(board).diagonal(5):
-        hit_diagonal = True
-        score_board['your_score'] += 4
-        board[0][12] = 'o'
-    if 'o' not in np.flipud(board).diagonal(7):
-        hit_diagonal = True
-        score_board['your_score'] += 3
-        board[0][14] = 'o'
-    if 'o' not in np.flipud(board).diagonal(9):
-        hit_diagonal = True
-        score_board['your_score'] += 2
-        board[0][16] = 'o'
-    check_if_two_together(hit_row, hit_column, hit_diagonal)
-    position_inputs()
+    # if 'o' not in board.diagonal():
+    #     hit_diagonal = True
+    #     score_board['your_score'] += 2
+    #     board[0][0] = 'o'
+    #     # replace_for_column = np.char.replace (diagonal,  '@', '*')
+    #     # print(replace_for_column)
+    #     # print('Total score:', score_board['your_score'])
+    # if 'o' not in board.diagonal(2):
+    #     hit_diagonal = True
+    #     score_board['your_score'] += 3
+    #     board[0][2] = 'o'
+    # if 'o' not in board.diagonal(4):
+    #     hit_diagonal = True
+    #     score_board['your_score'] += 4
+    #     board[0][4] = 'o'
+    # if 'o' not in board.diagonal(6):
+    #     hit_diagonal = True
+    #     score_board['your_score'] += 5
+    #     board[0][6] = 'o'
+    # if 'o' not in np.flipud(board).diagonal(3):
+    #     hit_diagonal = True
+    #     score_board['your_score'] += 5
+    #     board[0][10] = 'o'
+    # if 'o' not in np.flipud(board).diagonal(5):
+    #     hit_diagonal = True
+    #     score_board['your_score'] += 4
+    #     board[0][12] = 'o'
+    # if 'o' not in np.flipud(board).diagonal(7):
+    #     hit_diagonal = True
+    #     score_board['your_score'] += 3
+    #     board[0][14] = 'o'
+    # if 'o' not in np.flipud(board).diagonal(9):
+    #     hit_diagonal = True
+    #     score_board['your_score'] += 2
+    #     board[0][16] = 'o'
+    # check_if_two_together(hit_row, hit_column, hit_diagonal)
 
-def check_if_two_together(in_row, in_column, in_diagonal):
-    '''If got two lines at once'''
+def check_for_lines():
+    '''Check if got lines for score and count it'''
+    statement_for_rows = threading.Thread(target= while_rows)
+    statement_for_columns = threading.Thread(target = while_columns)
+    position_inputs_again = threading.Thread(target = position_inputs)
+    statement_for_rows.start()
+    statement_for_columns.start()
+    position_inputs_again.start()
 
-    if in_row and in_column:
-        print('hit hit_row and hit_column')
-    if in_column and in_diagonal:
-        print('hit hit_column and hit_diagonal')
-    if in_row and in_diagonal:
-        print('hit ')
 
 def decide_winner():
     '''Decide who won'''
