@@ -4,6 +4,7 @@ import numpy as np
 '''Time will help me to run a few sunctions at a time'''
 import time
 import threading
+import random
 
 score_board = {'your_score': 0,
                'bots_score': 0}
@@ -166,5 +167,17 @@ def decide_winner():
     else:
         print('It\'s a draw.')
 
+def bot_position_choose():
+    '''Make computer to choose a random position in board'''
+    bots_position_in_row = random.randint(1,7)
+    bots_position_in_column = random.randint(3, 13)
+    if board[bots_position_in_row][bots_position_in_column] !='o':
+        bot_position_choose()
+    else:
+        board[bots_position_in_row][bots_position_in_column] = '@'
+bot_position_choose()
+for i in range(0, 8):
+    print(board[i])
 
+# bot_position_choose()
 init_game()
