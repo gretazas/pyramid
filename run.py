@@ -10,22 +10,21 @@ score_board = {'your_score': 0,
                'bots_score': 0}
 
 board = np.array([['','','','','','','','','','','','','','','','',''],
-                  ['o','','','', 1, 2, 3, 4, 5, 6, 7, 8, 9, '.', '.', '.','.'],
+                  ['o','','','o', 1, 2, 3, 4, 5, 6, 7, 8, 9, '.', '.', '.','.'],
                   ['','','','A', '', '', '', '', 'o', '', '', '', '', '', '', '',''],
                   ['','','','B', '', '', '', 'o', '', 'o', '', '', '', '', '', '',''],
                   ['','','','C', '', '', 'o', '', 'o', '', 'o', '', '', '', '', '',''],
                   ['','','','D', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '', '',''],
                   ['','','','E', 'o', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '',''],
-                  ['','o','o','o','','','','','','','','','','o','o','o','o']])
+                  ['','o','o','','','','','','','','','','','o','o','o','o']])
 
 GAME_IS_ON = True
+active_players_score = 'your_score'
 
 def init_game():
     """Print score board game initialization"""
 
     your_total_score = score_board['your_score']
-    # global active_player
-    # active_player = your_score
     print('Your score: ')
     print(your_total_score)
     bot_total_score = score_board['bots_score']
@@ -82,13 +81,15 @@ def position_is_valid(row, column):
             for i in range(0, 8):
                 print(board[i])
             print('Your score:', score_board['your_score'])
+            print('Bot\'s score:', score_board['bots_score'])
         else:
             for i in range(0, 8):
                 print(board[i])
             print('Your score:', score_board['your_score'])
+            print('Bot\'s score:', score_board['bots_score'])
             decide_winner()
 
-        check_for_lines()#was before position_inputs()
+        check_for_lines()
 
 def while_rows():
     '''Get eatch row and get score for it'''
@@ -97,33 +98,25 @@ def while_rows():
         while 'o' not in one_row:
             score_board['your_score'] += np.count_nonzero(one_row)
             score_board['your_score'] -= 1 #it would not include letter at index 0
-            # np.char.replace (one_row,  '@', '*')
             one_row[12] = 'o'
-            print('row score:', score_board['your_score'])
+            print('row score:', active_players_score)
             break
 
-                                        # all_columns = board[1:6, 1:10]
-                                        # for column in all_columns
 def while_columns():
     '''Get eatch column and get score for it'''
     for one_column in board.T:
         while 'o' not in one_column:
             score_board['your_score'] += np.count_nonzero(one_column)
             score_board['your_score'] -= 1 #it would not include number at index 0
-            # replace_for_column = np.char.replace (column,  '@', '*')
-            # print(replace_for_column)
             one_column[len(one_column)-1] = 'o'
-            print(one_column)
-            print('column score:', score_board['your_score'])
+            print('column score:', active_players_score)
             break
 
 def while_diagonals():
+    '''Get each diagonal and score for it'''
     while 'o' not in board.diagonal():
         score_board['your_score'] += 2
         board[0][0] = 'o'
-        # replace_for_column = np.char.replace (diagonal,  '@', '*')
-        # print(replace_for_column)
-        # print('Total score:', score_board['your_score'])
     while 'o' not in board.diagonal(2):
         score_board['your_score'] += 3
         board[0][2] = 'o'
@@ -151,15 +144,39 @@ def check_for_lines():
     statement_for_rows = threading.Thread(target = while_rows)
     statement_for_columns = threading.Thread(target = while_columns)
     statement_for_diagonals = threading.Thread(target = while_diagonals)
-    position_inputs_again = threading.Thread(target = position_inputs)
+    # position_inputs_again = threading.Thread(target = position_inputs)
     statement_for_diagonals.start()
     statement_for_rows.start()
     statement_for_columns.start()
-    position_inputs_again.start()
+    # change active player
+    change_active_player()
+    # position_inputs_again.start()
 
+def change_active_player():
+    '''Change active player'''
+    global active_players_score
+    if active_players_score == score_board['your_score']:
+        active_players_score = score_board['bots_score']
+        bot_position_choose()
+    else:
+        active_players_score = score_board['your_score']
+        position_inputs()
 
+def bot_position_choose():
+    '''Make computer to choose a random position in board'''
+    bots_position_in_row = random.randint(2,7)
+    bots_position_in_column = random.randint(4, 13)
+    if board[bots_position_in_row][bots_position_in_column] != 'o':
+        bot_position_choose()
+    else:
+        board[bots_position_in_row][bots_position_in_column] = '@'
+
+for i in range(0, 8):
+    print(board[i])
+
+# bot_position_choose()
 def decide_winner():
-    '''Decide who won'''
+    '''Decide winner'''
     if score_board['your_score'] > score_board['bots_score']:
         print('Congradulations! You are the winner!')
     elif score_board['your_score'] < score_board['bots_score']:
@@ -167,17 +184,4 @@ def decide_winner():
     else:
         print('It\'s a draw.')
 
-def bot_position_choose():
-    '''Make computer to choose a random position in board'''
-    bots_position_in_row = random.randint(1,7)
-    bots_position_in_column = random.randint(3, 13)
-    if board[bots_position_in_row][bots_position_in_column] !='o':
-        bot_position_choose()
-    else:
-        board[bots_position_in_row][bots_position_in_column] = '@'
-bot_position_choose()
-for i in range(0, 8):
-    print(board[i])
-
-# bot_position_choose()
 init_game()
