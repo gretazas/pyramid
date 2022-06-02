@@ -96,47 +96,47 @@ def while_rows():
     all_rows = board[1:6, :]
     for one_row in all_rows:
         while 'o' not in one_row:
-            score_board['your_score'] += np.count_nonzero(one_row)
-            score_board['your_score'] -= 1 #it would not include letter at index 0
+            score_board[active_players_score] += np.count_nonzero(one_row)
+            score_board[active_players_score] -= 1 #it would not include letter at index 0
             one_row[12] = 'o'
-            print('row score:', active_players_score)
+            print('row score:', score_board[active_players_score])
             break
 
 def while_columns():
     '''Get eatch column and get score for it'''
     for one_column in board.T:
         while 'o' not in one_column:
-            score_board['your_score'] += np.count_nonzero(one_column)
-            score_board['your_score'] -= 1 #it would not include number at index 0
+            score_board[active_players_score] += np.count_nonzero(one_column)
+            score_board[active_players_score] -= 1 #it would not include number at index 0
             one_column[len(one_column)-1] = 'o'
-            print('column score:', active_players_score)
+            print('column score:', score_board[active_players_score])
             break
 
 def while_diagonals():
     '''Get each diagonal and score for it'''
     while 'o' not in board.diagonal():
-        score_board['your_score'] += 2
+        score_board[active_players_score] += 2
         board[0][0] = 'o'
     while 'o' not in board.diagonal(2):
-        score_board['your_score'] += 3
+        score_board[active_players_score] += 3
         board[0][2] = 'o'
     while 'o' not in board.diagonal(4):
-        score_board['your_score'] += 4
+        score_board[active_players_score] += 4
         board[0][4] = 'o'
     while 'o' not in board.diagonal(6):
-        score_board['your_score'] += 5
+        score_board[active_players_score] += 5
         board[0][6] = 'o'
     while 'o' not in np.flipud(board).diagonal(3):
-        score_board['your_score'] += 5
+        score_board[active_players_score] += 5
         board[0][10] = 'o'
     while 'o' not in np.flipud(board).diagonal(5):
-        score_board['your_score'] += 4
+        score_board[active_players_score] += 4
         board[0][12] = 'o'
     while 'o' not in np.flipud(board).diagonal(7):
-        score_board['your_score'] += 3
+        score_board[active_players_score] += 3
         board[0][14] = 'o'
     while 'o' not in np.flipud(board).diagonal(9):
-        score_board['your_score'] += 2
+        score_board[active_players_score] += 2
         board[0][16] = 'o'
 
 def check_for_lines():
@@ -145,23 +145,25 @@ def check_for_lines():
     statement_for_columns = threading.Thread(target = while_columns)
     statement_for_diagonals = threading.Thread(target = while_diagonals)
     # position_inputs_again = threading.Thread(target = position_inputs)
+    change_active_players = threading.Thread(target = change_active_player)
     statement_for_diagonals.start()
     statement_for_rows.start()
     statement_for_columns.start()
     # change active player
-    change_active_player()
-    # position_inputs_again.start()
+    change_active_players.start()
+    #position_inputs_again.start()
 
 def change_active_player():
     '''Change active player'''
     global active_players_score
-    if active_players_score == score_board['your_score']:
-        active_players_score = score_board['bots_score']
-        bot_position_choose()
+    if active_players_score == 'your_score':
+        active_players_score = 'bots_score'
+        bot_position_choose()# last stoped here 
     else:
-        active_players_score = score_board['your_score']
+        active_players_score = 'your_score'
         position_inputs()
-
+    return active_players_score
+    
 def bot_position_choose():
     '''Make computer to choose a random position in board'''
     bots_position_in_row = random.randint(2,7)
@@ -170,6 +172,7 @@ def bot_position_choose():
         bot_position_choose()
     else:
         board[bots_position_in_row][bots_position_in_column] = '@'
+        #check_for_lines()
 
 for i in range(0, 8):
     print(board[i])
