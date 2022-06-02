@@ -163,7 +163,7 @@ def change_active_player():
         active_players_score = 'your_score'
         position_inputs()
     return active_players_score
-    
+
 def bot_position_choose():
     '''Make computer to choose a random position in board'''
     bots_position_in_row = random.randint(2,7)
