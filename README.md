@@ -1,31 +1,39 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+### Top <h1 style="text-align: center;"><strong>Pyramid Game</strong></h1>
+<h2 style="text-align: center;"><strong>Welcome to the README PAGE of the Pyramid Game</strong></h2>
 
-Welcome gretazas,
+### Link to the Pyramid Game app:  
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+<a href="https://pyramid-lines.herokuapp.com/">https://pyramid-lines.herokuapp.com/</a>
 
-## Reminders
+### Link to the GitHub page with Pyramid Game:  
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+<a href="https://github.com/gretazas/pyramid">https://github.com/gretazas/pyramid</a>
 
-## Creating the Heroku app
+<img src="" style="border:3git add .  px solid green" alt="">
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+# Acknowledgements
 
-1. `heroku/python`
-2. `heroku/nodejs`
+# **[Game instuctions](./game_intro.md)**
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+# Content
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+* [Built with intention to practise use](#built-with-intention-to-practise-use)
+* [User experience](#user-experience)
+* [Languages Used](#languages-used)
+* [Frameworks, Libraries & Programs I Used:](#built-with-intention-to-practise-use)
+* [Proved By](#proved-by)
+* [Features](#features) :
+    * [Random](#random)
+    * [Numpy](#numpy)
+    * [Threading](#threading)
+* [Future feature](#future-feature)
+* [Deployment steps](#deployment-steps) :
+    * [Initial Deployment](#initial-deployment)
+    * [How To Fork A Repository](#how-to-fork-a-repository)
+    * [How To Clone A Repository](#how-to-clone-a-repository)
+    * [How To Make A Local Clone](#how-to-make-a-local-clone)
+* [Testing](#testing)
+* [Code](#code)
+* [Issues and bugs](#issues-and-bugs)
+* [Focus group](#focus-group)
+* [Contact](#contact)
