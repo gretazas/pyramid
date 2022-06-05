@@ -1,4 +1,3 @@
-'''Numpy will help me to navigate through the rows and columns'''
 import numpy as np
 
 
@@ -31,15 +30,59 @@ GAME_IS_ON = True
 ACTIVE_PLAYERS_SCORE = 'your_score'
 
 
+def choose_level():
+    '''Choose your level'''
+
+    while GAME_IS_ON:
+        try:
+            print('Choose your game level- ')
+            level_input = str(input('E for easy or H for hard: ')).upper()
+            chosen_level_validation(level_input)
+            break
+        except ValueError:
+            print('Not a required letter, please try again')
+            choose_level()
+        except KeyError:
+            print('Not a required letter, please try again')
+            choose_level()
+
+
+def chosen_level_validation(check_input):
+    '''Check if clevel choise is valid'''
+
+    if check_input == 'E' or check_input == 'H':
+        level_is_chosen(check_input)
+    else:
+        print('It must be E or H, please try again: ')
+        choose_level()
+
+
+def level_is_chosen(chosen_level):
+    '''Decide level of the game that player chose'''
+
+    global ACTIVE_PLAYERS_SCORE
+    if chosen_level == 'E':
+        ACTIVE_PLAYERS_SCORE = 'your_score'
+        print('chose E', ACTIVE_PLAYERS_SCORE)
+        init_game()
+    else:
+        ACTIVE_PLAYERS_SCORE = 'bots_score'
+        print('chose h', ACTIVE_PLAYERS_SCORE)
+        init_game()
+
+
 def init_game():
     """Print score board game initialization"""
 
-    your_total_score = score_board['your_score']
-    print('Your int score: ', your_total_score)
-    bot_total_score = score_board['bots_score']
-    print('Bot\'s int score: ', bot_total_score)
-    print(board[1:7, 3:13])
-    position_inputs()
+    if ACTIVE_PLAYERS_SCORE == 'your_score':
+        your_total_score = score_board['your_score']
+        print('Your int score: ', your_total_score)
+        bot_total_score = score_board['bots_score']
+        print('Bot\'s int score: ', bot_total_score)
+        print(board[1:7, 3:13])
+        position_inputs()
+    else:
+        bot_position_choose()
 
 
 def position_inputs():
@@ -245,4 +288,4 @@ def decide_winner():
         print('/////////////////////////////////////////')
 
 
-init_game()
+choose_level()
