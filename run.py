@@ -31,7 +31,7 @@ ACTIVE_PLAYERS_SCORE = 'your_score'
 
 
 def choose_level():
-    '''Choose your level'''
+    '''input to choose players level'''
 
     while GAME_IS_ON:
         try:
@@ -87,6 +87,15 @@ def init_game():
 
 def position_inputs():
     '''Initial game inputs to choose first move'''
+
+    global ACTIVE_PLAYERS_SCORE
+    if 'o' in board[2:7, 4:13]:
+        print(board[0:14, 0:17])
+    else:
+        print(board[0:14, 0:17])
+        ACTIVE_PLAYERS_SCORE = False
+        decide_winner()
+        return ACTIVE_PLAYERS_SCORE
 
     while GAME_IS_ON:
         try:
@@ -257,6 +266,7 @@ def change_active_player():
 def bot_position_choose():
     '''Make computer to choose a random position in board'''
 
+    global ACTIVE_PLAYERS_SCORE
     bots_position_in_row = random.randint(2, 6)
     bots_position_in_column = random.randint(4, 12)
     # I need to eliminate emplty spaces in order to choose right position
@@ -266,7 +276,6 @@ def bot_position_choose():
         # Once got 'o' in board mark it '@' as taken
         board[bots_position_in_row][bots_position_in_column] = '@'
 
-    print(board[0:14, 0:17])
     # Check if scored:
     check_for_lines()
 
