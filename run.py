@@ -12,11 +12,11 @@ score_board = {'your_score': 0,
 
 board = np.array([
  ['', '', '', 'o', '', '', '', '', '', '', '', '', '', '', '', '', ''],
- ['o', '', '', '.  ', '1', '2', '3', '4', '5 ', '6 ', '7 ', '8 ', '9', '.', '.', '.', ''],
+ ['o', '', '', '.  ', '1', '2', '3', '4', '5  ', '6 ', '7 ', '8 ', '9', '.', '.', '.', ''],
  ['', '', '', 'A      ', '', '', '', '', 'o', '', '', '', '', '', '', '', ''],
  ['', '', '', 'B     ', '', '', '', 'o', '   ', 'o', '', '', '', '', '', '', ''],
  ['', '', '', 'C    ', '', '', 'o', '  ', 'o', '   ', 'o', '', '', '', '', '', ''],
- ['', '', '', 'D   ', '', 'o', '  ', 'o', '  ', 'o', '   ', 'o', '', '', '', '', ''],
+ ['', '', '', 'D   ', '', 'o', ' ', 'o', '   ', 'o', '   ', 'o', '', '', '', '', ''],
  ['', '', '', 'E ', 'o', '  ', 'o', '  ', 'o', '   ', 'o', '   ', 'o', '', '', '', ''],
  ['', 'o', 'o', '', '', '', '', '', '', '', '', '', '', '', 'o', 'o', 'o'],
  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
@@ -167,7 +167,7 @@ def while_rows():
             one_row[16] = 'o'
             new_value = score_board.get(ACTIVE_PLAYERS_SCORE)
             update = new_value - old_score
-            print('Line in row', ACTIVE_PLAYERS_SCORE, 'is up by', update)
+            print(f'Line in row{ACTIVE_PLAYERS_SCORE}is up by {update}')
             break
 
 
@@ -183,7 +183,7 @@ def while_columns():
             one_column[len(one_column)-1] = 'o'
             new_value = score_board.get(ACTIVE_PLAYERS_SCORE)
             update = new_value - old_score
-            print('Line in column', ACTIVE_PLAYERS_SCORE, 'is up by', update)
+            print(f'Line in column {ACTIVE_PLAYERS_SCORE} is up by {update}')
             break
 
 
@@ -193,42 +193,42 @@ def while_diagonals():
     while 'o' not in board.diagonal():
         score_board[ACTIVE_PLAYERS_SCORE] += 2
         board[0][0] = 'o'
-        print('Line in diagonal', ACTIVE_PLAYERS_SCORE, 'is up by 2')
+        print(f'Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 2')
         break
     while 'o' not in board.diagonal(2):
         score_board[ACTIVE_PLAYERS_SCORE] += 3
         board[0][2] = 'o'
-        print('Line in diagonal', ACTIVE_PLAYERS_SCORE, 'is up by 3')
+        print(f'Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 3')
         break
     while 'o' not in board.diagonal(4):
         score_board[ACTIVE_PLAYERS_SCORE] += 4
         board[12][16] = 'o'
-        print('Line in diagonal', ACTIVE_PLAYERS_SCORE, 'is up by 4')
+        print(f'Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 4')
         break
     while 'o' not in board.diagonal(6):
         score_board[ACTIVE_PLAYERS_SCORE] += 5
         board[10][16] = 'o'
-        print('Line in diagonal', ACTIVE_PLAYERS_SCORE, 'is up by 5')
+        print(f'Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 5')
         break
     while 'o' not in np.flipud(board).diagonal(-3):
         score_board[ACTIVE_PLAYERS_SCORE] += 5
         board[10][0] = 'o'
-        print('Line in diagonal', ACTIVE_PLAYERS_SCORE, 'is up by 5')
+        print(f'Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 5')
         break
     while 'o' not in np.flipud(board).diagonal(-1):
         score_board[ACTIVE_PLAYERS_SCORE] += 4
         board[12][0] = 'o'
-        print('Line in diagonal', ACTIVE_PLAYERS_SCORE, 'is up by 4')
+        print(f'Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 4')
         break
     while 'o' not in np.flipud(board).diagonal(1):
         score_board[ACTIVE_PLAYERS_SCORE] += 3
         board[0][14] = 'o'
-        print('Line in diagonal', ACTIVE_PLAYERS_SCORE, 'is up by 3')
+        print(f'Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 3')
         break
     while 'o' not in np.flipud(board).diagonal(3):
         score_board[ACTIVE_PLAYERS_SCORE] += 2
         board[0][16] = 'o'
-        print('Line in diagonal', ACTIVE_PLAYERS_SCORE, 'is up by 2')
+        print(f'Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 2')
         break
 
 
