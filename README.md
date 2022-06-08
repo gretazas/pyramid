@@ -37,3 +37,22 @@
 * [Issues and bugs](#issues-and-bugs)
 * [Focus group](#focus-group)
 * [Contact](#contact)
+
+# Built with intention to practise use
+# User experience
+# Languages Used
+# Frameworks, Libraries & Programs I Used
+# Proved By
+# Features
+    - Random
+    - Numpy
+    - Threading
+# Future feature
+# Deployment steps
+# Testing
+# Code
+# Issues and bugs
+# Focus group
+# Contact 
+
+

@@ -26,22 +26,20 @@ board = np.array([
  ['', '', '', '', '', '', '', '', '', '', '', '', '', 'o', '', '', ''],
  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']])
 
-GAME_IS_ON = True
+
 ACTIVE_PLAYERS_SCORE = 'your_score'
 
 
 def choose_level():
     '''input to choose players level'''
 
-    while GAME_IS_ON:
+    game_on = True
+    while game_on:
         try:
             print('Choose your game level- ')
             level_input = str(input('E for easy or H for hard: ')).upper()
             chosen_level_validation(level_input)
             break
-        except ValueError:
-            print('Not a required letter, please try again')
-            choose_level()
         except KeyError:
             print('Not a required letter, please try again')
             choose_level()
@@ -72,32 +70,27 @@ def level_is_chosen(chosen_level):
 
 
 def init_game():
-    """Print score board game initialization"""
+    """Print score, board as game initialization
+        and from chosen level decide who starts the game"""
+
+    print(board[1:7, 3:13])
+    your_total_score = score_board['your_score']
+    print('Your int score: ', your_total_score)
+    bot_total_score = score_board['bots_score']
+    print('Bot\'s int score: ', bot_total_score)
 
     if ACTIVE_PLAYERS_SCORE == 'your_score':
-        your_total_score = score_board['your_score']
-        print('Your int score: ', your_total_score)
-        bot_total_score = score_board['bots_score']
-        print('Bot\'s int score: ', bot_total_score)
-        print(board[1:7, 3:13])
         position_inputs()
     else:
         bot_position_choose()
 
 
 def position_inputs():
-    '''Initial game inputs to choose first move'''
+    '''Game inputs( to choose a position) provided for player'''
 
-    global ACTIVE_PLAYERS_SCORE
-    if 'o' in board[2:7, 4:13]:
-        print(board[0:14, 0:17])
-    else:
-        print(board[0:14, 0:17])
-        ACTIVE_PLAYERS_SCORE = False
-        decide_winner()
-        return ACTIVE_PLAYERS_SCORE
+    game = True
 
-    while GAME_IS_ON:
+    while game:
         try:
             row_input = input('Choose a letter from A-E for row: ').upper()
             letters_to_numbers = {'A': 2, 'B': 3, 'C': 4, 'D': 5, 'E': 6}
@@ -110,7 +103,7 @@ def position_inputs():
             print('Not a required letter, please start again')
             position_inputs()
 
-    while GAME_IS_ON:
+    while game:
         try:
             column_input = int(input('Your number 1-9 for column: '))
             column_input += 3
@@ -125,29 +118,21 @@ def position_inputs():
 def position_is_valid(row, column):
     """Valid posiotion choises"""
 
-    global GAME_IS_ON
-    if GAME_IS_ON:
-        if row not in range(1, 7):
-            print('Not a required letter, please start again')
-            position_inputs()
-        elif column not in range(4, 13):
-            print('Not a required number, please try again')
-            position_inputs()
-        elif board[row][column] == '@':
-            print('Already chosen, please try again.')
-            position_inputs()
-        elif board[row][column] == '':
-            print('Emply field, please try again.')
-            position_inputs()
-        else:
-            board[row][column] = '@'
-            if 'o' in board[2:7, 4:13]:
-                print(board[0:14, 0:17])
-                check_for_lines()
-            else:
-                GAME_IS_ON = False
+    if row not in range(1, 7):
+        print('Not a required letter, please start again')
+        position_inputs()
+    elif column not in range(4, 13):
+        print('Not a required number, please try again')
+        position_inputs()
+    elif board[row][column] == '@':
+        print('Already chosen, please try again.')
+        position_inputs()
+    elif board[row][column] == '':
+        print('Emply field, please try again.')
+        position_inputs()
     else:
-        decide_winner()
+        board[row][column] = '@'
+        check_for_lines()
 
 
 def while_rows():
@@ -229,44 +214,48 @@ def while_diagonals():
 
 
 def check_for_lines():
-    '''Get functions to work at the same time'''
+    '''Get to functions that count scores:
+            for lines in rows,
+            for lines in columns,
+            for lines in diagonals - to work at the same time'''
 
     statement_for_rows = threading.Thread(target=while_rows)
     statement_for_columns = threading.Thread(target=while_columns)
     statement_for_diagonals = threading.Thread(target=while_diagonals)
-    # position_inputs_again = threading.Thread(target = position_inputs)
-    # change_active_players = threading.Thread(target=change_active_player)
     statement_for_diagonals.start()
     statement_for_rows.start()
     statement_for_columns.start()
+    print(board[1:7, 3:13])
     print('Your score:', score_board['your_score'])
     print('Bot\'s score:', score_board['bots_score'])
-    # change active player
-    change_active_player()
-    # position_inputs_again.start()
+    check_game_is_on()
+
+
+def check_game_is_on():
+    '''Check if game is on before continue with next player'''
+
+    if 'o' in board[2:7, 4:13]:
+        change_active_player()
+    else:
+        decide_winner()
 
 
 def change_active_player():
     '''Change active player'''
 
-    global GAME_IS_ON
-    if GAME_IS_ON:
-        global ACTIVE_PLAYERS_SCORE
-        if ACTIVE_PLAYERS_SCORE == 'your_score':
-            ACTIVE_PLAYERS_SCORE = 'bots_score'
-            bot_position_choose()
-            return ACTIVE_PLAYERS_SCORE
-        else:
-            ACTIVE_PLAYERS_SCORE = 'your_score'
-            position_inputs()
+    global ACTIVE_PLAYERS_SCORE
+    if ACTIVE_PLAYERS_SCORE == 'your_score':
+        ACTIVE_PLAYERS_SCORE = 'bots_score'
+        bot_position_choose()
+        return ACTIVE_PLAYERS_SCORE
     else:
-        position_is_valid(0, 0)
+        ACTIVE_PLAYERS_SCORE = 'your_score'
+        position_inputs()
 
 
 def bot_position_choose():
-    '''Make computer to choose a random position in board'''
+    '''For computer to choose a random position in board'''
 
-    global ACTIVE_PLAYERS_SCORE
     bots_position_in_row = random.randint(2, 6)
     bots_position_in_column = random.randint(4, 12)
     # I need to eliminate emplty spaces in order to choose right position
@@ -275,9 +264,8 @@ def bot_position_choose():
     else:
         # Once got 'o' in board mark it '@' as taken
         board[bots_position_in_row][bots_position_in_column] = '@'
-
-    # Check if scored:
-    check_for_lines()
+        # Check if scored:
+        check_for_lines()
 
 
 def decide_winner():
