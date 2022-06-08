@@ -13,11 +13,11 @@ score_board = {'your_score': 0,
 board = np.array([
  ['', '', '', 'o', '', '', '', '', '', '', '', '', '', '', '', '', ''],
  ['o', '', '', '.', 1, 2, 3, 4, 5, 6, 7, 8, 9, '.', '.', '.', ''],
- ['', '', '', 'A', '', '', '', '', 'o', '', '', '', '', '', '', '', ''],
- ['', '', '', 'B', '', '', '', 'o', '', 'o', '', '', '', '', '', '', ''],
- ['', '', '', 'C', '', '', 'o', '', 'o', '', 'o', '', '', '', '', '', ''],
- ['', '', '', 'D', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '', '', ''],
- ['', '', '', 'E', 'o', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '', ''],
+ ['', '', '', 'A   ', '', '', '', '', 'o', '', '', '', '', '', '', '', ''],
+ ['', '', '', 'B  ', '', '', '', 'o', '', ' o', '', '', '', '', '', '', ''],
+ ['', '', '', 'C. ', '', '', 'o', '', 'o', '', '  o', '', '', '', '', '', ''],
+ ['', '', '', 'D. ', '', 'o', '', 'o', '', ' o', '', 'o', '', '', '', '', ''],
+ ['', '', '', 'E.', 'o', '', 'o', '', 'o', '', '  o', '', 'o', '', '', '', ''],
  ['', 'o', 'o', '', '', '', '', '', '', '', '', '', '', '', 'o', 'o', 'o'],
  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
@@ -73,7 +73,7 @@ def init_game():
     """Print score, board as game initialization
         and from chosen level decide who starts the game"""
 
-    print(board[1:7, 3:13])
+    print_board()
     your_total_score = score_board['your_score']
     print('Your int score: ', your_total_score)
     bot_total_score = score_board['bots_score']
@@ -83,6 +83,27 @@ def init_game():
         position_inputs()
     else:
         bot_position_choose()
+
+
+def print_board():
+    '''Print board and score'''
+
+    your_score = score_board['your_score']
+    bots_score = score_board['bots_score']
+    print(f'Your score: {your_score}')
+    print(f'Bot\'s score: {bots_score}')
+    line1 = '  '.join(board[1][3:13])
+    print(line1)
+    line2 = '  '.join(board[2][3:13])
+    print(line2)
+    line3 = '  '.join(board[3][3:13])
+    print(line3)
+    line4 = '  '.join(board[4][3:13])
+    print(line4)
+    line5 = '  '.join(board[5][3:13])
+    print(line5)
+    line6 = '  '.join(board[6][3:13])
+    print(line6)
 
 
 def position_inputs():
@@ -225,9 +246,7 @@ def check_for_lines():
     statement_for_diagonals.start()
     statement_for_rows.start()
     statement_for_columns.start()
-    print(board[1:7, 3:13])
-    print('Your score:', score_board['your_score'])
-    print('Bot\'s score:', score_board['bots_score'])
+    print_board()
     check_game_is_on()
 
 
