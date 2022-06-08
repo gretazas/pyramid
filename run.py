@@ -11,20 +11,63 @@ score_board = {'your_score': 0,
                'bots_score': 0}
 
 board = np.array([
- ['', '', '', 'o', '', '', '', '', '', '', '', '', '', '', '', '', ''],
- ['o', '', '', '.  ', '1', '2', '3', '4', '5  ', '6 ', '7 ', '8 ', '9', '.', '.', '.', ''],
- ['', '', '', 'A      ', '', '', '', '', 'o', '', '', '', '', '', '', '', ''],
- ['', '', '', 'B     ', '', '', '', 'o', '   ', 'o', '', '', '', '', '', '', ''],
- ['', '', '', 'C    ', '', '', 'o', '  ', 'o', '   ', 'o', '', '', '', '', '', ''],
- ['', '', '', 'D   ', '', 'o', ' ', 'o', '   ', 'o', '   ', 'o', '', '', '', '', ''],
- ['', '', '', 'E ', 'o', '  ', 'o', '  ', 'o', '   ', 'o', '   ', 'o', '', '', '', ''],
- ['', 'o', 'o', '', '', '', '', '', '', '', '', '', '', '', 'o', 'o', 'o'],
- ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
- ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
- ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
- ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
- ['', '', '', '', '', '', '', '', '', '', '', '', '', 'o', '', '', ''],
- ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']])
+ [
+  '', '', '', 'o', '', '',
+  '', '', '', '', '', '',
+  '', '', '', '', ''
+ ], [
+  'o', '', '', '.  ', '1', '2',
+  '3', '4', '5  ', '6 ', '7 ', '8 ',
+  '9', '.', '.', '.', ''
+ ], [
+  '', '', '', 'A      ', '', '',
+  '', '', 'o', '', '', '',
+  '', '', '', '', ''
+ ], [
+  '', '', '', 'B     ', '', '',
+  '', 'o', '   ', 'o', '', '',
+  '', '', '', '', ''
+ ], [
+  '', '', '', 'C    ', '', '',
+  'o', '  ', 'o', '   ', 'o', '',
+  '', '', '', '', ''
+ ], [
+  '', '', '', 'D   ', '', 'o',
+  ' ', 'o', '   ', 'o', '   ', 'o',
+  '', '', '', '', ''
+ ], [
+  '', '', '', 'E ', 'o', '  ',
+  'o', '  ', 'o', '   ', 'o', '   ',
+  'o', '', '', '', ''
+ ], [
+  '', 'o', 'o', '', '', '',
+  '', '', '', '', '', '',
+  '', '', 'o', 'o', 'o'
+ ], [
+  '', '', '', '', '', '',
+  '', '', '', '', '', '',
+  '', '', '', '', ''
+ ], [
+  '', '', '', '', '', '',
+  '', '', '', '', '', '',
+  '', '', '', '', ''
+ ], [
+  '', '', '', '', '', '',
+  '', '', '', '', '', '',
+  '', '', '', '', ''
+ ], [
+  '', '', '', '', '', '',
+  '', '', '', '', '', '',
+  '', '', '', '', ''
+ ], [
+  '', '', '', '', '', '',
+  '', '', '', '', '', '',
+  '', 'o', '', '', ''
+ ], [
+  '', '', '', '', '', '',
+  '', '', '', '', '', '',
+  '', '', '', '', ''
+ ]])
 
 
 ACTIVE_PLAYERS_SCORE = 'your_score'
@@ -32,6 +75,11 @@ ACTIVE_PLAYERS_SCORE = 'your_score'
 
 def choose_level():
     '''input to choose players level'''
+
+    print('  ~~~~~~~. Welcome .~~~~~~~')
+    print(' ~~~~~~~~~~. to  .~~~~~~~~~~~')
+    print('~~~~~~~. Pyramids Game .~~~~~~~')
+    print('                                  ')
 
     game_on = True
     while game_on:
@@ -72,10 +120,6 @@ def init_game():
         and from chosen level decide who starts the game"""
 
     print_board()
-    your_total_score = score_board['your_score']
-    print(f'Your int score: {your_total_score}')
-    bot_total_score = score_board['bots_score']
-    print(f'Bot\'s int score: {bot_total_score}')
 
     if ACTIVE_PLAYERS_SCORE == 'your_score':
         position_inputs()
@@ -85,11 +129,7 @@ def init_game():
 
 def print_board():
     '''Print board and score'''
-
-    your_score = score_board['your_score']
-    bots_score = score_board['bots_score']
-    print(f'Your score: {your_score}')
-    print(f'Bot\'s score: {bots_score}')
+    
     line1 = '. '.join(board[1][3:13])
     print(line1)
     line2 = '  '.join(board[2][3:13])
@@ -102,8 +142,12 @@ def print_board():
     print(line5)
     line6 = '  '.join(board[6][3:13])
     print(line6)
-
-
+    your_score = score_board['your_score']
+    bots_score = score_board['bots_score']
+    print(f'Your score: {your_score}')
+    print(f'Bot\'s score: {bots_score}')
+    
+    
 def position_inputs():
     '''Game inputs( to choose a position) provided for player'''
 
@@ -188,7 +232,7 @@ def while_columns():
 
 
 def while_diagonals():
-    '''Get each diagonal and score for it'''
+    '''Get each diagonal if all '@'s and score for it'''
 
     while 'o' not in board.diagonal():
         score_board[ACTIVE_PLAYERS_SCORE] += 2
