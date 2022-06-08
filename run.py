@@ -13,11 +13,11 @@ score_board = {'your_score': 0,
 board = np.array([
  ['', '', '', 'o', '', '', '', '', '', '', '', '', '', '', '', '', ''],
  ['o', '', '', '.', 1, 2, 3, 4, 5, 6, 7, 8, 9, '.', '.', '.', ''],
- ['', '', '', 'A   ', '', '', '', '', 'o', '', '', '', '', '', '', '', ''],
- ['', '', '', 'B  ', '', '', '', 'o', '', ' o', '', '', '', '', '', '', ''],
- ['', '', '', 'C. ', '', '', 'o', '', 'o', '', '  o', '', '', '', '', '', ''],
- ['', '', '', 'D. ', '', 'o', '', 'o', '', ' o', '', 'o', '', '', '', '', ''],
- ['', '', '', 'E.', 'o', '', 'o', '', 'o', '', '  o', '', 'o', '', '', '', ''],
+ ['', '', '', 'A  ', '', '', '', '', 'o', '', '', '', '', '', '', '', ''],
+ ['', '', '', 'B', '', '', '', 'o', '', 'o', '', '', '', '', '', '', ''],
+ ['', '', '', 'C', '', '', 'o', '', 'o', '', 'o', '', '', '', '', '', ''],
+ ['', '', '', 'D', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '', '', ''],
+ ['', '', '', 'E', 'o', '', 'o', '', 'o', '', 'o', '', 'o', '', '', '', ''],
  ['', 'o', 'o', '', '', '', '', '', '', '', '', '', '', '', 'o', 'o', 'o'],
  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
@@ -61,11 +61,9 @@ def level_is_chosen(chosen_level):
     global ACTIVE_PLAYERS_SCORE
     if chosen_level == 'E':
         ACTIVE_PLAYERS_SCORE = 'your_score'
-        print('chose E', ACTIVE_PLAYERS_SCORE)
         init_game()
     else:
         ACTIVE_PLAYERS_SCORE = 'bots_score'
-        print('chose h', ACTIVE_PLAYERS_SCORE)
         init_game()
 
 
@@ -75,9 +73,9 @@ def init_game():
 
     print_board()
     your_total_score = score_board['your_score']
-    print('Your int score: ', your_total_score)
+    print(f'Your int score: {your_total_score}')
     bot_total_score = score_board['bots_score']
-    print('Bot\'s int score: ', bot_total_score)
+    print(f'Bot\'s int score: {bot_total_score}')
 
     if ACTIVE_PLAYERS_SCORE == 'your_score':
         position_inputs()
