@@ -1,11 +1,7 @@
-import numpy as np
-
-
+'''Numpy official documentation at: https://numpy.org/doc/'''
 import threading
-
-
 import random
-
+import numpy as np
 
 score_board = {'your_score': 0,
                'bots_score': 0}
@@ -77,8 +73,8 @@ def choose_level():
     '''input to choose players level'''
 
     print('  ~~~~~~~. Welcome .~~~~~~~')
-    print(' ~~~~~~~~~~. to  .~~~~~~~~~~~')
-    print('~~~~~~~. Pyramids Game .~~~~~~~')
+    print(' ~~~~~~~~~. to  .~~~~~~~~~~~')
+    print('~~~~~~~. Pyramid Game .~~~~~~~')
     print('                                  ')
 
     game_on = True
@@ -116,9 +112,9 @@ def level_is_chosen(chosen_level):
 
 
 def init_game():
-    """Print score, board as game initialization
-        and from chosen level decide who starts the game"""
-
+    '''Print score, board as game initialization
+    and from chosen level decide who starts the game
+    '''
     print_board()
 
     if ACTIVE_PLAYERS_SCORE == 'your_score':
@@ -129,7 +125,7 @@ def init_game():
 
 def print_board():
     '''Print board and score'''
-    
+
     line1 = '. '.join(board[1][3:13])
     print(line1)
     line2 = '  '.join(board[2][3:13])
@@ -146,8 +142,8 @@ def print_board():
     bots_score = score_board['bots_score']
     print(f'Your score: {your_score}')
     print(f'Bot\'s score: {bots_score}')
-    
-    
+
+
 def position_inputs():
     '''Game inputs( to choose a position) provided for player'''
 
@@ -179,7 +175,7 @@ def position_inputs():
 
 
 def position_is_valid(row, column):
-    """Valid posiotion choises"""
+    '''Valid posiotion choises'''
 
     if row not in range(1, 7):
         print('Not a required letter, please start again')
@@ -278,9 +274,10 @@ def while_diagonals():
 
 def check_for_lines():
     '''Get to functions that count scores:
-            for lines in rows,
-            for lines in columns,
-            for lines in diagonals - to work at the same time'''
+    for lines in rows,
+    for lines in columns,
+    for lines in diagonals - to work at the same time
+    '''
 
     statement_for_rows = threading.Thread(target=while_rows)
     statement_for_columns = threading.Thread(target=while_columns)
