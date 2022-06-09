@@ -207,10 +207,10 @@ Inspiration for the project came from my mom. She taught me this game when I was
 
 <img src="./assets/images/loop.png" style="width:150px; heigh:150px;" alt="Loop in code">
 
-* Too long lines was another issue<br>
+* Too long lines was another issue i had to fix. <br>
 
-<img src="./assets/images/too_long_lines.png" style="width:150px; heigh:150px;" alt="Error">
-<img src="./assets/images/fixed_lines.png" style="width:150px; heigh:150px;" alt="Error fixed">
+<img src="./assets/images/too_long_lines.png" style="width:150px; heigh:150px;" alt="Error"><img src="./assets/images/fixed_lines.png" style="width:150px; heigh:150px;" alt="Error fixed">
+
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
 
