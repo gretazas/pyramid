@@ -90,7 +90,7 @@ def choose_level():
 
 
 def chosen_level_validation(check_input):
-    '''Check if clevel choise is valid'''
+    '''Check if level choise is valid'''
 
     if check_input == 'E' or check_input == 'H':
         level_is_chosen(check_input)

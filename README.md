@@ -11,7 +11,7 @@
 <a href="https://github.com/gretazas/pyramid">https://github.com/gretazas/pyramid</a>
 
 <p align="center">
-<img width="350" height="250" radius="30px" src="./assets/images/pyramid.jpg" alt="Pyramid">
+<img width="350" height="250" src="./assets/images/pyramid.jpg" alt="Pyramid">
 </p>
 
 # Acknowledgements
@@ -185,6 +185,8 @@ I have manually tested this project by doing the following:
 
 Inspiration for the project came from my mom. She taught me this game when I was small. 
 
+**[Code explained in detail](./functions.md)**
+
 * All code was written by myself and was learned from [www.codeinstitute.net](https://www.codeinstitute.net).
 * As far as I know game does not exist on the internet. I like logic games but never came across this one. 
 * Tutorials of battleship game and Tik Tac Toe that helped me to figure out how to build my game.
@@ -209,7 +211,7 @@ Inspiration for the project came from my mom. She taught me this game when I was
 
 * Too long lines was another issue i had to fix. <br>
 
-<img src="./assets/images/too_long_lines.png" style="width:150px; heigh:150px;" alt="Error"><img src="./assets/images/fixed_lines.png" style="width:150px; heigh:150px;" alt="Error fixed">
+<img src="./assets/images/too_long_lines.png" style="width:150px; heigh:150px;" alt="Error">   <img src="./assets/images/fixed_lines.png" style="width:150px; heigh:150px;" alt="Error fixed">
 
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
