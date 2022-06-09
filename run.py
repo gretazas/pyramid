@@ -126,7 +126,7 @@ def init_game():
 def print_board():
     '''Print board and score'''
 
-    print('----------------------------------')
+    print("-------------------------------------")
     line1 = '. '.join(board[1][3:13])
     print(line1)
     line2 = '  '.join(board[2][3:13])
@@ -139,7 +139,7 @@ def print_board():
     print(line5)
     line6 = '  '.join(board[6][3:13])
     print(line6)
-    print('----------------------------------')
+    print("-------------------------------------")
     your_score = score_board['your_score']
     bots_score = score_board['bots_score']
     print(f'Your score: {your_score}')
@@ -153,7 +153,7 @@ def position_inputs():
 
     while game:
         try:
-            row_input = input('Choose a letter from A-E for row: ').upper()
+            row_input = input('Choose a letter from A-E in row: ').upper()
             letters_to_numbers = {'A': 2, 'B': 3, 'C': 4, 'D': 5, 'E': 6}
             row_input = letters_to_numbers[row_input]
             break
@@ -166,7 +166,7 @@ def position_inputs():
 
     while game:
         try:
-            column_input = int(input('Your number 1-9 for column: '))
+            column_input = int(input('Your number 1-9 in column: '))
             column_input += 3
             break
         except ValueError:

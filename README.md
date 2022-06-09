@@ -10,24 +10,30 @@
 
 <a href="https://github.com/gretazas/pyramid">https://github.com/gretazas/pyramid</a>
 
-<img src="" style="border:3git add .  px solid green" alt="">
+<p align="center">
+<img width="350" height="250" radius="30px" src="./assets/images/pyramid.jpg" alt="Pyramid">
+</p>
 
 # Acknowledgements
+
+Python is a language that I haven't done any projects with yet. That is my third portfolio in Code Institute, but my very first project in Python language.
+Usually, when I start a new chapter in the course, I would check what is expected in the project at the end of the course, to start thinking of ideas during the course. Think of the code I could use in the project. In the beginning, was kind of difficult to think of something, but it just came to me. I was not sure if I will be able to pull it off. And I think if it is not Numpy I wouldn't be able.  The thought of this game. It gave me pride, and joy and brought good memories. My mom, who passed away recently, taught me this game when I was small. We used to play it on copies. It would bigger pyramid though 10 points max line, not 5. And I added a rule where the player can get a score for multiple lines, where we would claim filled line as a separate move, without adding position.
+My mom was a coder too,  she told me stories about the very first gigantic computers she used to work with and the algorithms she used to write. 
 
 # **[Game Instructions/Rules](./game_intro.md)**
 
 # Content
 
-* [Built with intention to practice](#built-with-intention-to-practice)
+* [Built to practice](#built-to-practice)
 * [User experience](#user-experience)
 * [Buildpacks Used](#buildpacks-used)
-* [Frameworks, Libraries & Programs I Used:](#built-with-intention-to-practise-use)
-* [Proved By](#proved-by)
-* [Features](#features) :
+* [Frameworks, Libraries & Programs I Used:](#frameworks-libraries-and-programs-i-used)
     * [Random](#random)
     * [Numpy](#numpy)
     * [Threading](#threading)
-* [Future feature](#future-feature)
+* [Proved By](#proved-by)
+* [Features](#features)
+* [Future features](#future-features)
 * [Deployment](#deployment)
     * [How To Fork A Repository](#how-to-fork-a-repository)
     * [How To Clone A Repository](#how-to-clone-a-repository)
@@ -75,7 +81,7 @@ At the end user gets the informational message about the winning, losing, or the
 - heroku/python
 - heroku/nodejs
 
-# Frameworks, Libraries & Programs I Used
+# Frameworks, Libraries and Programs I Used
 
 - Random
 - Numpy
@@ -107,7 +113,7 @@ At the end user gets the informational message about the winning, losing, or the
 - Print at the end of the game with announcing message stating your win/loss.
 
 
-# Future feature
+# Future features
 
 * In the future I would like to add one more level of difficulty and add bots logic where it could see potential in scoring more points with certain position moves.
 * Specify the board when conditioning if 'o' not in line, so could eliminate rows of lines in board.
@@ -125,14 +131,15 @@ Steps for deployment:
 - Link the Heroku app to the repository
 - Click on **Deploy**
 
-How to Fork a Repository:
-1. Login or Sign Up to [GitHub](www.github.com).
-2. On GitHub, go to [https://github.com/gretazas/pyramid](https://github.com/gretazas/pyramid)".
+
+[How to Fork a Repository:](https://support.atlassian.com/bitbucket-cloud/docs/fork-a-repository/)
+1. Login or Sign Up to [GitHub](https://github.com/).
+2. On GitHub, go to [https://github.com/gretazas/pyramid](https://github.com/gretazas/pyramid)
 3. In the top right corner, click "Fork".
 
-How to Clone a Repository:
-1. Login in to [GitHub](www.github.com).
-2. Fork the repository [https://github.com/gretazas/pyramid](https://github.com/gretazas/pyramid) using the steps above in [How To Fork a Repository](#HOW-TO-FORK-A-REPOSITORY).
+[How to Clone a Repository:](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-repository/)
+1. Login in to [GitHub](https://github.com/).
+2. Fork the repository [https://github.com/gretazas/pyramid](https://github.com/gretazas/pyramid) using the steps above in [How To Fork a Repository](#how-to-fork-a-repository)
 3. Above the file list, click "Code".
 4. Choose if you want to close using HTTPS, SSH or GitHub CLI, then click the copy button to the right.
 5. Open Git Bash.
@@ -141,7 +148,7 @@ How to Clone a Repository:
 8. Press Enter to create your clone.
 
 How to make a Local Clone:
-1. Login in to [GitHub](www.github.com).
+1. Login in to [GitHub](https://github.com/)
 2. Under the repository name, above the list of files, click "Code".
 3. Here you can either Clone or Download the repository.
 4. You should close the repository using HTTPS, clicking on the icon to copy the link.
@@ -190,14 +197,20 @@ Inspiration for the project came from my mom. She taught me this game when I was
 * Some rows and columns are marked with 'o' already to tell the computer not to consider those lines for the score as if no 'o's.
 * Every taken move is marked '@' for the Player to see taken positions. The computer will not let repeat the move.
 * At the moment Bot makes random moves generated by the computer.
-* 
 
 # Issues and bugs
 
 * Diagonals. Was not sure if I will be able to make it after all when it comes to diagonals. Was a great coding experience. Numpy has this incredible program that can recognize diagonals. The other issue I came across, is that my game has different types of diagonals. Those which go from the top left and those that go from the top right. But luckily Numpy is the master for both types. The difference was that it would read the line backward, but it did not make any issues to my code at this point,  as I only need to count the non-zero value characters.
 * It took me a while to figure out how diagonals will work on the board in order of marking the taken lines. 
 * How the score will be counted and lines will be marked as taken.
-* At some point I got the last function run over 50 times and was stuck in a loop. Later I figure out that def check_for_lines() ran multiple times. I needed to make sure that the scored points are counted before announcing the message of winning/ losing/ draw.
+* At some point I got the last function run over 50 times and was stuck in a loop. Later I figure out that def check_for_lines() ran multiple times. I needed to make sure that the scored points are counted before announcing the message of winning/ losing/ draw.<br>
+
+<img src="./assets/images/loop.png" style="width:150px; heigh:150px;" alt="Loop in code">
+
+* Too long lines was another issue<br>
+
+<img src="./assets/images/too_long_lines.png" style="width:150px; heigh:150px;" alt="Error">
+<img src="./assets/images/fixed_lines.png" style="width:150px; heigh:150px;" alt="Error fixed">
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
 
