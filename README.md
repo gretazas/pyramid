@@ -14,7 +14,7 @@
 
 # Acknowledgements
 
-# **[Game instuctions](./game_intro.md)**
+# **[Game Instructions/Rules](./game_intro.md)**
 
 # Content
 
@@ -38,7 +38,7 @@
 * [Focus group](#focus-group)
 * [Contact](#contact)
 
-# Built with intention to practice
+# Built to practice
 
 - Implement a given algorithm as a computer program
 - Adapt and combine algorithms to solve a given problem
@@ -46,11 +46,30 @@
 - Explain what a given program does
 - Identify and repair coding errors in a program
 - Use library software for building a graphical user interface, or command-line interface, or web application, or mathematical software
-- Implement a data model, application features and business logic to manage, query and manipulate data to meet given needs in a particular real-world domain.
+- Implement a data model, application features, and business logic to manage, query and manipulate data to meet given needs in a particular real-world domain.
 - Demonstrate and document the development process through a version control system such as GitHub
 - Deploy a command-line application to a cloud-based platform
 
 # User experience
+
+The user is welcomed with a greeting at the beginning of the game.
+The user is asked to put valid input to choose the level:
+- E for easy one where the user makes the first move.
+    - Advantage of this situation for the user is that when the game is over user's move is the last one. That gives the user extra points.
+- H for hard level.
+    - Disadvantage of this situation for the user is that the Bot starts and ends the game, which gives it extra points to score.
+
+The user has to have some tactics in the game, but can not predict the game fully, since the Bot is making random moves. 
+
+The user is asked to put valid data to make move.
+- For the position in the Row the user must choose a letter between A-E.
+- For the position in the Column the user must choose a number between 1-9.
+Those two coordinates become the position on the board in Pyramid Game.
+
+The Player must guess the Bot's possible moves. And there is a window for a bit of gambling here. The Player could prepare a few lines to be completed only with one position chosen to get more points with one possible move. But it is also a risk that the Bot could choose positions randomly. But also Player could plan a bit of the position situation, hoping that the Bot would choose useful positions giving a chance for the user to fill a couple of lines with one move.
+
+At the end user gets the informational message about the winning, losing, or the draw of the game.
+
 # Buildpacks Used
 
 - heroku/python
@@ -70,39 +89,40 @@
 
 # Features
 
-- First feature in this app is printed Welcome message
-- First interactive feature in this app is to choose a level. Easy/ Hard
-- Then the board is printed along with scores
-- Then fallowed by making the move using inputs only if Player chose easy level
-     - It is easy, because in this case Player starts and ends the game
-     - It gives a chance to earn extra points
-- Or Bot randomly choosing position on board if level is hard
-    - It is hard because in this case Bot starts and ends the game.
-    - Player must predict Bot's last moves in order to earn higher score
-- Printed score update
-- Printed inforamtion is maintainig with each score:<p style="font-size:12px;">(There could be multiple line score at the same time)</p>
+- The first feature in this app is a printed Welcome message.
+- The first interactive feature in this app is to choose a level. Easy/ Hard.
+- Then the board is printed along with scores.
+- Then followed by making the move using inputs only if the Player chose easy level.
+     - It is easy because in this case the Player starts and ends the game.
+     - It gives a chance to earn extra points.
+- Or the Bot randomly chooses a position on board if a level is hard.
+    - It is hard because in this case the Bot starts and ends the game.
+    - Player must predict the Bot's last moves to earn a higher score.
+- Printed score update.
+- Printed information is maintaining with each score:<p style="font-size:12px;">(There could be multiple line score at the same time)</p>
     - In Rows
     - In Columns
     - In Diagonals
-- Changing active players after each move
-- Print at the end of game with accouncing message stating your win/loss
+- Changing active players after each move.
+- Print at the end of the game with announcing message stating your win/loss.
 
 
 # Future feature
 
-In the future i would like to add one more level of difficulty and add bots logic where it could see potentional in scoring more points with certain position moves.
+* In the future I would like to add one more level of difficulty and add bots logic where it could see potential in scoring more points with certain position moves.
+* Specify the board when conditioning if 'o' not in line, so could eliminate rows of lines in board.
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
 
 # Deployment
 
-This project was deployed using personal Heroku account.
+This project was deployed using a personal Heroku account.
 
 Steps for deployment:
 - Fork or clone this repository
 - Create a new Heroku app
-- Set the builtpacks to Python and NodeJS in the order
-- Link the Heroku app to repository
+- Set the buildpacks to Python and NodeJS in the order
+- Link the Heroku app to the repository
 - Click on **Deploy**
 
 How to Fork a Repository:
@@ -128,7 +148,7 @@ How to make a Local Clone:
 5. Open Git Bash.
 6. Change the current working directory to the new location, where you want the cloned directory to be.
 7. Type git clone and then paste the URL you copied in step 4.
-8. Press Enter, and your local clone will be created.
+8. Press Enter and your local clone will be created.
 
 The site was deployed to Github pages using the following steps:
 * In the Github repository, navigate to the settings tab.
@@ -140,18 +160,44 @@ The site was deployed to Github pages using the following steps:
 
 # Testing
 
-I have manually tested this project by doing the fallowing:
-- Passed the code through a PEP8 linter and comfirmed there are no problems
-- Given invalid inputs: strings when numbers are expected, out of bounds inputs, same input twice
+I have manually tested this project by doing the following:
+- Passed the code through a PEP8 linter and confirmed there are no problems.
+- Given invalid inputs: strings when numbers are expected, out of bounds inputs, same input twice.
 - Tested in my local terminal and the Heroku terminal.
+- Checked if the map for letters turned into numbers to choose a position in the Row is converted right.
+- Checked for right scores with lines in Rows.
+- Checked for right scores with lines in Columns.
+- Checked for right scores with lines in Diagonals.
+- Tested if scored when multiple lines are filled at once.
+- Made sure the User starts the game when a level is Easy.
+- Made sure the Bot starts the game when a level is Hard.
+- Checked each and every line is scored correctly.
+- Checked if the score was implemented accordingly.
 
 # Code
 
-* All code was written by myself and was learnt from [www.codeinstitute.net](https://www.codeinstitute.net) and [w3schools.com](https://www.w3schools.com/).
-* Inspiration for project came from my mom who passed away half year ago. R.I.P.
+Inspiration for the project came from my mom. She taught me this game when I was small. 
+
+* All code was written by myself and was learned from [www.codeinstitute.net](https://www.codeinstitute.net).
+* As far as I know game does not exist on the internet. I like logic games but never came across this one. 
+* Tutorials of battleship game and Tik Tac Toe that helped me to figure out how to build my game.
+* Had to figure out how to count score. That's where np.count_nonzero() came to help.
+* How to mark the line as taken not to count it again. So I decided to add more lines onto the board, that would be hidden from the user.
+* The reason for that is that all game conditioning is based on: if 'o' not in a Row/ Column/ Diagonal, count points = True.
+* So every time there are no 'o's left in the line computer will count the non-zero strings in the line and will add them to the score.
+* Then the additional, hidden line will be marked with 'o' so it will never be counted again. (if 'o' not in a Row/ Column/ Diagonal, count points = False)
+* The issue with Diagonals is that they would come across Columns. I added multiple empty lines and columns for Diagonals not to criss-cross with Columns when marked taken.
+* Some rows and columns are marked with 'o' already to tell the computer not to consider those lines for the score as if no 'o's.
+* Every taken move is marked '@' for the Player to see taken positions. The computer will not let repeat the move.
+* At the moment Bot makes random moves generated by the computer.
+* 
 
 # Issues and bugs
 
+* Diagonals. Was not sure if I will be able to make it after all when it comes to diagonals. Was a great coding experience. Numpy has this incredible program that can recognize diagonals. The other issue I came across, is that my game has different types of diagonals. Those which go from the top left and those that go from the top right. But luckily Numpy is the master for both types. The difference was that it would read the line backward, but it did not make any issues to my code at this point,  as I only need to count the non-zero value characters.
+* It took me a while to figure out how diagonals will work on the board in order of marking the taken lines. 
+* How the score will be counted and lines will be marked as taken.
+* At some point I got the last function run over 50 times and was stuck in a loop. Later I figure out that def check_for_lines() ran multiple times. I needed to make sure that the scored points are counted before announcing the message of winning/ losing/ draw.
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
 
@@ -159,9 +205,11 @@ I have manually tested this project by doing the fallowing:
 
 * I'd like to thank the following people for the help they gave me with this project:
   - My daughter Madelyne for helping me with README.md page and checking the game function.<br>
-  - John, Alex and Gemma from Code Institute Tutor Assistance.<br>
-  - Help from Slack: ...........................
-  - Mentor Anthony.
+  - John, Alex, and Gemma from Code Institute Tutor Assistance.<br>
+  - Help from Code Institute Slack app: 
+        DaveHarricks_ci, Sean YOUng_aluminati, Ian Meigh_5p,
+        Eventyret_mentor, DaveHorocks_5p, Manni_alumnus
+
   <img src="https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png" width="90">
   
  
