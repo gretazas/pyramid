@@ -126,6 +126,7 @@ def init_game():
 def print_board():
     '''Print board and score'''
 
+    print('----------------------------------')
     line1 = '. '.join(board[1][3:13])
     print(line1)
     line2 = '  '.join(board[2][3:13])
@@ -138,6 +139,7 @@ def print_board():
     print(line5)
     line6 = '  '.join(board[6][3:13])
     print(line6)
+    print('----------------------------------')
     your_score = score_board['your_score']
     bots_score = score_board['bots_score']
     print(f'Your score: {your_score}')
@@ -207,7 +209,7 @@ def while_rows():
             one_row[16] = 'o'
             new_value = score_board.get(ACTIVE_PLAYERS_SCORE)
             update = new_value - old_score
-            print(f'Line in row {ACTIVE_PLAYERS_SCORE} is up by {update} ')
+            print(f'Line in row {ACTIVE_PLAYERS_SCORE} is up by {update}')
             break
 
 
@@ -223,7 +225,7 @@ def while_columns():
             one_column[len(one_column)-1] = 'o'
             new_value = score_board.get(ACTIVE_PLAYERS_SCORE)
             update = new_value - old_score
-            print(f'Line in column {ACTIVE_PLAYERS_SCORE} is up by {update} ')
+            print(f'Line in column {ACTIVE_PLAYERS_SCORE} is up by {update}')
             break
 
 
