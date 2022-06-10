@@ -73,15 +73,15 @@ def choose_level():
     '''input to choose players level'''
 
     print('  ~~~~~~~. Welcome .~~~~~~~ \n')
-    print(' ~~~~~~~~~. to  .~~~~~~~~~~~ \n')
+    print(' ~~~~~~~~~.  to  .~~~~~~~~~~ \n')
     print('~~~~~~~. Pyramid Game .~~~~~~~ \n')
-    print('                                  ')
+    print('                                 \n')
 
     game_on = True
     while game_on:
         try:
-            print('Choose your game level- \n')
-            level_input = str(input('E for easy or H for hard: ')).upper()
+            print(' Choose your game level- \n')
+            level_input = str(input(' E for easy or H for hard: ')).upper()
             chosen_level_validation(level_input)
             break
         except KeyError:
@@ -95,7 +95,7 @@ def chosen_level_validation(check_input):
     if check_input == 'E' or check_input == 'H':
         level_is_chosen(check_input)
     else:
-        print('It must be E or H, please try again: \n')
+        print(' It must be E or H, please try again: \n')
         choose_level()
 
 
@@ -142,8 +142,8 @@ def print_board():
     print("------------------------------------- \n")
     your_score = score_board['your_score']
     bots_score = score_board['bots_score']
-    print(f'Your score: {your_score}')
-    print(f'Bot\'s score: {bots_score}')
+    print(f' Your score: {your_score}')
+    print(f' Bot\'s score: {bots_score}')
 
 
 def position_inputs():
@@ -153,24 +153,24 @@ def position_inputs():
 
     while game:
         try:
-            row_input = input('Choose a letter from A-E in row: ').upper()
+            row_input = input(' Choose a letter from A-E in row: ').upper()
             letters_to_numbers = {'A': 2, 'B': 3, 'C': 4, 'D': 5, 'E': 6}
             row_input = letters_to_numbers[row_input]
             break
         except ValueError:
-            print('Not a required letter, please start again \n')
+            print(' Not a required letter, please start again \n')
             position_inputs()
         except KeyError:
-            print('Not a required letter, please start again \n')
+            print(' Not a required letter, please start again \n')
             position_inputs()
 
     while game:
         try:
-            column_input = int(input('Your number 1-9 in column: '))
+            column_input = int(input(' Your number 1-9 in column: '))
             column_input += 3
             break
         except ValueError:
-            print('Not a required number, please try again \n')
+            print(' Not a required number, please try again \n')
             position_inputs()
 
     position_is_valid(row_input, column_input)
@@ -180,25 +180,25 @@ def position_is_valid(row, column):
     '''Valid posiotion choises'''
 
     if row not in range(1, 7):
-        print('Not a required letter, please start again \n')
+        print(' Not a required letter, please start again \n')
         position_inputs()
     elif column not in range(4, 13):
-        print('Not a required number, please try again \n')
+        print(' Not a required number, please try again \n')
         position_inputs()
     elif board[row][column] == '@':
-        print('Already chosen, please try again. \n')
+        print(' Already chosen, please try again. \n')
         position_inputs()
     elif board[row][column] == '':
-        print('Emply field, please try again. \n')
+        print(' Emply field, please try again. \n')
         position_inputs()
     elif board[row][column] == ' ':
-        print('Emply field, please try again. \n')
+        print(' Emply field, please try again. \n')
         position_inputs()
     elif board[row][column] == '  ':
-        print('Emply field, please try again. \n')
+        print(' Emply field, please try again. \n')
         position_inputs()
     elif board[row][column] == '   ':
-        print('Emply field, please try again. \n')
+        print(' Emply field, please try again. \n')
         position_inputs()
     else:
         board[row][column] = '@'
@@ -217,9 +217,9 @@ def while_rows():
             # it would not include letter at index 0
             one_row[16] = 'o'
             new_value = score_board.get(ACTIVE_PLAYERS_SCORE)
-            updt = new_value - old_score
+            udt = new_value - old_score
             nline = '\n'
-            print(f'{nline}Line in row {ACTIVE_PLAYERS_SCORE} is up by {updt}')
+            print(f'{nline} Line in row {ACTIVE_PLAYERS_SCORE} is up by {udt}')
             break
 
 
@@ -237,7 +237,7 @@ def while_columns():
             upd = new_value - old_score
             nline = '\n'
             print(
-                f'{nline}Line in column {ACTIVE_PLAYERS_SCORE} is up by {upd}'
+                f'{nline} Line in column {ACTIVE_PLAYERS_SCORE} is up by {upd}'
                 )
             break
 
@@ -245,46 +245,46 @@ def while_columns():
 def while_diagonals():
     '''Get each diagonal if all '@'s and score for it'''
 
-    new_line = '\n'
+    nw_line = '\n'
     while 'o' not in board.diagonal():
         score_board[ACTIVE_PLAYERS_SCORE] += 2
         board[0][0] = 'o'
-        print(f'{new_line}Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 2 ')
+        print(f'{nw_line} Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 2 ')
         break
     while 'o' not in board.diagonal(2):
         score_board[ACTIVE_PLAYERS_SCORE] += 3
         board[0][2] = 'o'
-        print(f'{new_line}Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 3 ')
+        print(f'{nw_line} Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 3 ')
         break
     while 'o' not in board.diagonal(4):
         score_board[ACTIVE_PLAYERS_SCORE] += 4
         board[12][16] = 'o'
-        print(f'{new_line}Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 4 ')
+        print(f'{nw_line} Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 4 ')
         break
     while 'o' not in board.diagonal(6):
         score_board[ACTIVE_PLAYERS_SCORE] += 5
         board[10][16] = 'o'
-        print(f'{new_line}Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 5 ')
+        print(f'{nw_line} Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 5 ')
         break
     while 'o' not in np.flipud(board).diagonal(-3):
         score_board[ACTIVE_PLAYERS_SCORE] += 5
         board[10][0] = 'o'
-        print(f'{new_line}Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 5 ')
+        print(f'{nw_line} Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 5 ')
         break
     while 'o' not in np.flipud(board).diagonal(-1):
         score_board[ACTIVE_PLAYERS_SCORE] += 4
         board[12][0] = 'o'
-        print(f'{new_line}Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 4 ')
+        print(f'{nw_line} Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 4 ')
         break
     while 'o' not in np.flipud(board).diagonal(1):
         score_board[ACTIVE_PLAYERS_SCORE] += 3
         board[0][14] = 'o'
-        print(f'{new_line}Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 3 ')
+        print(f'{nw_line} Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 3 ')
         break
     while 'o' not in np.flipud(board).diagonal(3):
         score_board[ACTIVE_PLAYERS_SCORE] += 2
         board[0][16] = 'o'
-        print(f'{new_line}Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 2 ')
+        print(f'{nw_line} Line in diagonal {ACTIVE_PLAYERS_SCORE} is up by 2 ')
         break
 
 
@@ -348,15 +348,15 @@ def decide_winner():
 
     if score_board['your_score'] > score_board['bots_score']:
         print('///////////////////////////////////////// \n')
-        print('Congradulations! You are the winner! \n')
+        print('     Congradulations! You are the winner! \n')
         print('/////////////////////////////////////////')
     elif score_board['your_score'] < score_board['bots_score \n']:
         print('///////////////////////////////////////// \n')
-        print('You lost! Sorry. \n')
+        print('     You lost! Sorry. \n')
         print('///////////////////////////////////////// \n')
     else:
         print('///////////////////////////////////////// \n')
-        print('It\'s a draw. \n')
+        print('       It\'s a draw. \n')
         print('///////////////////////////////////////// \n')
 
 
