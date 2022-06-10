@@ -126,7 +126,7 @@ def init_game():
 def print_board():
     '''Print board and score'''
 
-    print("------------------------------------- \n")
+    print("\n------------------------------------- \n")
     line1 = '. '.join(board[1][3:13])
     print(line1)
     line2 = '  '.join(board[2][3:13])
