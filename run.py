@@ -72,20 +72,20 @@ ACTIVE_PLAYERS_SCORE = 'your_score'
 def choose_level():
     '''input to choose players level'''
 
-    print('  ~~~~~~~. Welcome .~~~~~~~')
-    print(' ~~~~~~~~~. to  .~~~~~~~~~~~')
-    print('~~~~~~~. Pyramid Game .~~~~~~~')
+    print('  ~~~~~~~. Welcome .~~~~~~~ \n')
+    print(' ~~~~~~~~~. to  .~~~~~~~~~~~ \n')
+    print('~~~~~~~. Pyramid Game .~~~~~~~ \n')
     print('                                  ')
 
     game_on = True
     while game_on:
         try:
-            print('Choose your game level- ')
-            level_input = str(input('E for easy or H for hard: ')).upper()
+            print('Choose your game level- \n')
+            level_input = str(input('E for easy or H for hard: \n')).upper()
             chosen_level_validation(level_input)
             break
         except KeyError:
-            print('Not a required letter, please try again')
+            print('Not a required letter, please try again \n')
             choose_level()
 
 
@@ -95,12 +95,12 @@ def chosen_level_validation(check_input):
     if check_input == 'E' or check_input == 'H':
         level_is_chosen(check_input)
     else:
-        print('It must be E or H, please try again: ')
+        print('It must be E or H, please try again: \n')
         choose_level()
 
 
 def level_is_chosen(chosen_level):
-    '''Decide level of the game that player chose'''
+    '''Decide level of the game that the player chooses'''
 
     global ACTIVE_PLAYERS_SCORE
     if chosen_level == 'E':
@@ -126,7 +126,7 @@ def init_game():
 def print_board():
     '''Print board and score'''
 
-    print("-------------------------------------")
+    print("------------------------------------- \n")
     line1 = '. '.join(board[1][3:13])
     print(line1)
     line2 = '  '.join(board[2][3:13])
@@ -139,7 +139,7 @@ def print_board():
     print(line5)
     line6 = '  '.join(board[6][3:13])
     print(line6)
-    print("-------------------------------------")
+    print("------------------------------------- \n")
     your_score = score_board['your_score']
     bots_score = score_board['bots_score']
     print(f'Your score: {your_score}')
@@ -147,7 +147,7 @@ def print_board():
 
 
 def position_inputs():
-    '''Game inputs( to choose a position) provided for player'''
+    '''Game inputs( to choose a position) provided for the player'''
 
     game = True
 
@@ -158,19 +158,19 @@ def position_inputs():
             row_input = letters_to_numbers[row_input]
             break
         except ValueError:
-            print('Not a required letter, please start again')
+            print('Not a required letter, please start again \n')
             position_inputs()
         except KeyError:
-            print('Not a required letter, please start again')
+            print('Not a required letter, please start again \n')
             position_inputs()
 
     while game:
         try:
-            column_input = int(input('Your number 1-9 in column: '))
+            column_input = int(input('Your number 1-9 in column: \n'))
             column_input += 3
             break
         except ValueError:
-            print('Not a required number, please try again ')
+            print('Not a required number, please try again \n')
             position_inputs()
 
     position_is_valid(row_input, column_input)
@@ -180,16 +180,16 @@ def position_is_valid(row, column):
     '''Valid posiotion choises'''
 
     if row not in range(1, 7):
-        print('Not a required letter, please start again')
+        print('Not a required letter, please start again \n')
         position_inputs()
     elif column not in range(4, 13):
-        print('Not a required number, please try again')
+        print('Not a required number, please try again \n')
         position_inputs()
     elif board[row][column] == '@':
-        print('Already chosen, please try again.')
+        print('Already chosen, please try again. \n')
         position_inputs()
     elif board[row][column] == '':
-        print('Emply field, please try again.')
+        print('Emply field, please try again. \n')
         position_inputs()
     else:
         board[row][column] = '@'
@@ -332,17 +332,17 @@ def decide_winner():
     '''Decide winner'''
 
     if score_board['your_score'] > score_board['bots_score']:
+        print('///////////////////////////////////////// \n')
+        print('Congradulations! You are the winner! \n')
         print('/////////////////////////////////////////')
-        print('Congradulations! You are the winner!')
-        print('/////////////////////////////////////////')
-    elif score_board['your_score'] < score_board['bots_score']:
-        print('/////////////////////////////////////////')
-        print('You lost! Sorry.')
-        print('/////////////////////////////////////////')
+    elif score_board['your_score'] < score_board['bots_score \n']:
+        print('///////////////////////////////////////// \n')
+        print('You lost! Sorry. \n')
+        print('///////////////////////////////////////// \n')
     else:
-        print('/////////////////////////////////////////')
-        print('It\'s a draw.')
-        print('/////////////////////////////////////////')
+        print('///////////////////////////////////////// \n')
+        print('It\'s a draw. \n')
+        print('///////////////////////////////////////// \n')
 
 
 choose_level()

@@ -19,13 +19,13 @@ When level is chosen, need to decide who will begin the game.
 
 Next picture shows that the Player must choose a position in the board to make a move
 
-<img width="350" height="150" src="./assets/images/def_images/position_inputs.png" alt="function">
+<img width="400" height="350" src="./assets/images/def_images/position_inputs.png" alt="function">
 
 The Bot chooses random position, by running positions with condition to get 'o' in it
 
-<img width="350" height="150" src="./assets/images/def_images/bot_position.png" alt="function">
+<img width="350" height="200" src="./assets/images/def_images/bot_position.png" alt="function">
 
 Then we check if we got any lines to score points.<br>
-We must run all functions together before continuing the game so we use threading
+We must run all functions together before continuing the game so we use threading.
 
-<img width="350" height="150" src="./assets/images/def_images/check_lines.png" alt="function">
+<img width="350" height="200" src="./assets/images/def_images/check_lines.png" alt="function">
