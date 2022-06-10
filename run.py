@@ -309,7 +309,6 @@ def check_game_is_on():
     '''Check if game is on before continue with next player'''
 
     print_board()
-    print(board[2:7, 4:13])
     if 'o' in board[2:7, 4:13]:
         change_active_player()
     else:
