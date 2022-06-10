@@ -191,6 +191,15 @@ def position_is_valid(row, column):
     elif board[row][column] == '':
         print('Emply field, please try again. \n')
         position_inputs()
+    elif board[row][column] == ' ':
+        print('Emply field, please try again. \n')
+        position_inputs()
+    elif board[row][column] == '  ':
+        print('Emply field, please try again. \n')
+        position_inputs()
+    elif board[row][column] == '   ':
+        print('Emply field, please try again. \n')
+        position_inputs()
     else:
         board[row][column] = '@'
         check_for_lines()
@@ -292,13 +301,14 @@ def check_for_lines():
     statement_for_diagonals.start()
     statement_for_rows.start()
     statement_for_columns.start()
-    print_board()
+
     check_game_is_on()
 
 
 def check_game_is_on():
     '''Check if game is on before continue with next player'''
 
+    print_board()
     if 'o' in board[2:7, 4:13]:
         change_active_player()
     else:
