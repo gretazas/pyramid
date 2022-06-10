@@ -81,7 +81,7 @@ def choose_level():
     while game_on:
         try:
             print('Choose your game level- \n')
-            level_input = str(input('E for easy or H for hard: \n')).upper()
+            level_input = str(input('E for easy or H for hard: ')).upper()
             chosen_level_validation(level_input)
             break
         except KeyError:
@@ -166,7 +166,7 @@ def position_inputs():
 
     while game:
         try:
-            column_input = int(input('Your number 1-9 in column: \n'))
+            column_input = int(input('Your number 1-9 in column: '))
             column_input += 3
             break
         except ValueError:
@@ -209,7 +209,8 @@ def while_rows():
             one_row[16] = 'o'
             new_value = score_board.get(ACTIVE_PLAYERS_SCORE)
             update = new_value - old_score
-            print(f'Line in row {ACTIVE_PLAYERS_SCORE} is up by {update}')
+            new_line = '\n'
+            print(f'{new_line}Line in row {ACTIVE_PLAYERS_SCORE} is up by {update}')
             break
 
 
@@ -225,7 +226,8 @@ def while_columns():
             one_column[len(one_column)-1] = 'o'
             new_value = score_board.get(ACTIVE_PLAYERS_SCORE)
             update = new_value - old_score
-            print(f'Line in column {ACTIVE_PLAYERS_SCORE} is up by {update}')
+            new_line = '\n'
+            print(f'{new_line}Line in column {ACTIVE_PLAYERS_SCORE} is up by {update}' )
             break
 
 
