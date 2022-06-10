@@ -85,7 +85,7 @@ def choose_level():
             chosen_level_validation(level_input)
             break
         except KeyError:
-            print('Not a required letter, please try again \n')
+            print(' Not a required letter, please try again \n')
             choose_level()
 
 
@@ -309,6 +309,7 @@ def check_game_is_on():
     '''Check if game is on before continue with next player'''
 
     print_board()
+    print(board[2:7, 4:13])
     if 'o' in board[2:7, 4:13]:
         change_active_player()
     else:
@@ -348,9 +349,9 @@ def decide_winner():
 
     if score_board['your_score'] > score_board['bots_score']:
         print('///////////////////////////////////////// \n')
-        print('     Congradulations! You are the winner! \n')
-        print('/////////////////////////////////////////')
-    elif score_board['your_score'] < score_board['bots_score \n']:
+        print('   Congradulations! You are the winner! \n')
+        print('///////////////////////////////////////// \n')
+    elif score_board['your_score'] < score_board['bots_score']:
         print('///////////////////////////////////////// \n')
         print('     You lost! Sorry. \n')
         print('///////////////////////////////////////// \n')
